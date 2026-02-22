@@ -1,29 +1,33 @@
 
-import React from "react";
-import { Box, Typography, Link } from "@mui/material";
+import React from 'react';
+import { Box, Typography, Container, Link } from '@mui/material';
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#f5f5f5",
-        p: 3,
-        mt: "auto",
-        textAlign: "center",
+        backgroundColor: (theme) => theme.palette.background.paper,
+        p: 6,
+        mt: 'auto',
       }}
+      component="footer"
     >
-      <Typography variant="body2" color="text.secondary">
-        © {new Date().getFullYear()} CoreTechTalks. All rights reserved.
-      </Typography>
-      <Link href="#" sx={{ mx: 1 }}>
-        Facebook
-      </Link>
-      <Link href="#" sx={{ mx: 1 }}>
-        Twitter
-      </Link>
-      <Link href="#" sx={{ mx: 1 }}>
-        LinkedIn
-      </Link>
+      <Container maxWidth="lg">
+        <Typography variant="body2" color="text.secondary" align="center">
+          © {new Date().getFullYear()} CoreTechTalks. All rights reserved.
+        </Typography>
+        <Typography variant="body2" color="text.secondary" align="center">
+          <Link color="inherit" href="https://www.facebook.com/">
+            Facebook
+          </Link>{' | '}
+          <Link color="inherit" href="https://www.twitter.com/">
+            Twitter
+          </Link>{' | '}
+          <Link color="inherit" href="https://www.linkedin.com/">
+            LinkedIn
+          </Link>
+        </Typography>
+      </Container>
     </Box>
   );
 };

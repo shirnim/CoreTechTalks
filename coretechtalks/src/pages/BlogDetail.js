@@ -1,38 +1,51 @@
 
-import React, { useState, useEffect } from "react";
-import { Box, Typography, Container } from "@mui/material";
-import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { Box, Typography, Container, Paper } from '@mui/material';
+
+const blogs = [
+  {
+    id: 1,
+    title: 'Getting Started with React',
+    content: 'Full content of the React blog post...',
+    author: 'John Doe',
+    date: 'October 26, 2023',
+  },
+  {
+    id: 2,
+    title: 'Understanding Node.js',
+    content: 'Full content of the Node.js blog post...',
+    author: 'Jane Smith',
+    date: 'October 28, 2023',
+  },
+];
 
 const BlogDetail = () => {
   const { id } = useParams();
-  const [blog, setBlog] = useState(null);
-
-  useEffect(() => {
-    const fetchBlog = async () => {
-      const docRef = doc(db, "blogs", id);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setBlog(docSnap.data());
-      } else {
-        console.log("No such document!");
-      }
-    };
-    fetchBlog();
-  }, [id]);
+  const blog = blogs.find((b) => b.id === parseInt(id));
 
   if (!blog) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Box sx={{ flexGrow: 1, py: 8, textAlign: 'center' }}>
+        <Typography variant="h5">Blog post not found</Typography>
+      </Box>
+    );
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Container maxWidth="md" sx={{ mt: 8 }}>
-        <Typography variant="h3" component="h1" gutterBottom>
-          {blog.title}
-        </Typography>
-        <Typography variant="body1">{blog.content}</Typography>
+    <Box sx={{ flexGrow: 1, py: 8 }}>
+      <Container maxWidth="md">
+        <Paper sx={{ p: 4 }}>
+          <Typography variant="h4" component="h1" gutterBottom>
+            {blog.title}
+          </Typography>
+          <Typography color="text.secondary" gutterBottom>
+            {blog.date} by {blog.author}
+          </Typography>
+          <Typography variant="body1" paragraph>
+            {blog.content}
+          </Typography>
+        </Paper>
       </Container>
     </Box>
   );

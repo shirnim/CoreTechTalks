@@ -1,44 +1,51 @@
 
-import React from "react";
-import { Box, Typography, Container, Link } from "@mui/material";
+import React from 'react';
+import { Box, Typography, Container, Grid, Card, CardContent, Button, CardActions } from '@mui/material';
 
 const tools = [
   {
-    name: "Firebase",
-    url: "https://firebase.google.com/",
-    description: "A comprehensive platform for building web and mobile applications.",
+    title: 'Tool 1',
+    description: 'A brief description of the first amazing tool.',
+    link: '#',
   },
   {
-    name: "React",
-    url: "https://reactjs.org/",
-    description: "A JavaScript library for building user interfaces.",
+    title: 'Tool 2',
+    description: 'A brief description of the second amazing tool.',
+    link: '#',
   },
   {
-    name: "Material-UI",
-    url: "https://mui.com/",
-    description: "A popular React UI framework for faster and easier web development.",
+    title: 'Tool 3',
+    description: 'A brief description of the third amazing tool.',
+    link: '#',
   },
 ];
 
 const Tools = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Container maxWidth="md" sx={{ mt: 8 }}>
-        <Typography variant="h3" component="h1" gutterBottom>
-          Tools & Resources
+    <Box sx={{ flexGrow: 1, py: 8 }}>
+      <Container maxWidth="lg">
+        <Typography variant="h4" component="h1" align="center" gutterBottom>
+          Our Tools
         </Typography>
-        <ul>
+        <Grid container spacing={4}>
           {tools.map((tool, index) => (
-            <li key={index}>
-              <Link href={tool.url} target="_blank" rel="noopener noreferrer">
-                <Typography variant="h6">{tool.name}</Typography>
-              </Link>
-              <Typography variant="body2" color="text.secondary">
-                {tool.description}
-              </Typography>
-            </li>
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    {tool.title}
+                  </Typography>
+                  <Typography variant="body2">{tool.description}</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" href={tool.link} target="_blank">
+                    Learn More
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
           ))}
-        </ul>
+        </Grid>
       </Container>
     </Box>
   );

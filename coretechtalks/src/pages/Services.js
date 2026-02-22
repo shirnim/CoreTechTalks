@@ -1,47 +1,48 @@
 
-import React from "react";
-import { Box, Typography, Container, Grid, Card, CardContent } from "@mui/material";
-import { Code, Web, Storage } from "@mui/icons-material";
+import React from 'react';
+import { Box, Typography, Container, Paper, Grid } from '@mui/material';
+import { Code, Web, Storage, Security } from '@mui/icons-material';
 
 const services = [
   {
-    title: "Web Development",
-    description: "Building modern, responsive, and scalable web applications.",
-    icon: <Web />,
+    icon: <Code fontSize="large" />,
+    title: 'Web Development',
+    description: 'We build modern, responsive, and high-performance web applications tailored to your business needs.',
   },
   {
-    title: "Backend Development",
-    description: "Developing robust and efficient server-side solutions.",
-    icon: <Code />,
+    icon: <Web fontSize="large" />,
+    title: 'API Development',
+    description: 'We design and build robust and scalable RESTful APIs to power your mobile and web applications.',
   },
   {
-    title: "Database Management",
-    description: "Managing and optimizing databases for performance and reliability.",
-    icon: <Storage />,
+    icon: <Storage fontSize="large" />,
+    title: 'Database Management',
+    description: 'We provide expert database management services to ensure your data is secure, organized, and easily accessible.',
+  },
+  {
+    icon: <Security fontSize="large" />,
+    title: 'Cybersecurity Consulting',
+    description: 'We help you identify and mitigate security vulnerabilities to protect your applications and data from threats.',
   },
 ];
 
 const Services = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Container maxWidth="md" sx={{ mt: 8 }}>
-        <Typography variant="h3" component="h1" gutterBottom>
+    <Box sx={{ flexGrow: 1, py: 8 }}>
+      <Container maxWidth="lg">
+        <Typography variant="h4" component="h1" align="center" gutterBottom>
           Our Services
         </Typography>
-        <Grid container spacing={4}>
+        <Grid container spacing={4} justifyContent="center">
           {services.map((service, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Card>
-                <CardContent sx={{ textAlign: "center" }}>
-                  {service.icon}
-                  <Typography variant="h5" component="h2" gutterBottom>
-                    {service.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {service.description}
-                  </Typography>
-                </CardContent>
-              </Card>
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <Paper sx={{ p: 4, textAlign: 'center' }}>
+                <Box sx={{ mb: 2 }}>{service.icon}</Box>
+                <Typography variant="h6" component="h2" gutterBottom>
+                  {service.title}
+                </Typography>
+                <Typography variant="body2">{service.description}</Typography>
+              </Paper>
             </Grid>
           ))}
         </Grid>

@@ -1,47 +1,23 @@
 
-import React from "react";
-import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            CoreTechTalks
-          </Link>
+        <Typography variant="h6" component={Link} to="/" sx={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}>
+          CoreTechTalks
         </Typography>
-        <Button color="inherit">
-          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            Home
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link to="/about" style={{ textDecoration: "none", color: "inherit" }}>
-            About
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link to="/services" style={{ textDecoration: "none", color: "inherit" }}>
-            Services
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link to="/blogs" style={{ textDecoration: "none", color: "inherit" }}>
-            Blogs
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link to="/tools" style={{ textDecoration: "none", color: "inherit" }}>
-            Tools
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link to="/contact" style={{ textDecoration: "none", color: "inherit" }}>
-            Contact
-          </Link>
-        </Button>
+        <Box>
+          <Button color="inherit" component={Link} to="/">Home</Button>
+          <Button color="inherit" component={Link} to="/about">About</Button>
+          <Button color="inherit" component={Link} to="/services">Services</Button>
+          <Button color="inherit" component={Link} to="/blogs">Blogs</Button>
+          <Button color="inherit" component={Link} to="/tools">Tools</Button>
+          <Button color="inherit" component={Link} to="/contact">Contact</Button>
+        </Box>
       </Toolbar>
     </AppBar>
   );
