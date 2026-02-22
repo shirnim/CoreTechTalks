@@ -19,7 +19,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ''Poppins', sans-serif', // A modern, geometric sans-serif font
+    fontFamily: 'Poppins, sans-serif', // A modern, geometric sans-serif font
     h1: {
       fontSize: '3rem',
       fontWeight: 700,
