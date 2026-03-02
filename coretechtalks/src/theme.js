@@ -3,18 +3,18 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#38bdf8',
+      main: '#00f5a0', // A vibrant green/cyan
     },
     secondary: {
-      main: '#a78bfa',
+      main: '#ff007a', // A vibrant pink
     },
     background: {
-      default: '#060b17',
-      paper: '#111a2f',
+      default: '#0a0f23', // A deep, dark blue
+      paper: '#161d3f',   // A slightly lighter, saturated blue for paper
     },
     text: {
-      primary: '#eaf1ff',
-      secondary: '#a8b8d8',
+      primary: '#ffffff',
+      secondary: '#b3b8d4',
     },
   },
   typography: {
@@ -42,21 +42,14 @@ const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 8,
   },
   components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          color: '#eaf1ff',
-        },
-      },
-    },
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: 'none',
-          borderRadius: 999,
+          borderRadius: 999, // Pill-shaped buttons
           fontWeight: 600,
         },
       },
@@ -65,18 +58,18 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: 'none',
-          backgroundColor: 'rgba(16, 25, 47, 0.78)',
-          border: '1px solid rgba(153, 177, 255, 0.2)',
-          backdropFilter: 'blur(8px)',
+          backgroundColor: 'rgba(22, 29, 63, 0.78)', // Corresponds to paper background
+          border: '1px solid rgba(179, 184, 212, 0.2)',
+          backdropFilter: 'blur(12px)',
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(16, 25, 47, 0.72)',
-          border: '1px solid rgba(153, 177, 255, 0.2)',
-          backdropFilter: 'blur(8px)',
+          backgroundColor: 'rgba(22, 29, 63, 0.72)', // Corresponds to paper background
+          border: '1px solid rgba(179, 184, 212, 0.2)',
+          backdropFilter: 'blur(12px)',
         },
       },
     },
