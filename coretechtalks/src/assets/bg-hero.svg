@@ -1,0 +1,28 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0B1020"/>
+  <g opacity="0.5" filter="url(#blurA)">
+    <ellipse cx="240" cy="140" rx="340" ry="220" fill="#1D4ED8"/>
+  </g>
+  <g opacity="0.45" filter="url(#blurB)">
+    <ellipse cx="1280" cy="220" rx="360" ry="250" fill="#7C3AED"/>
+  </g>
+  <g opacity="0.3" filter="url(#blurC)">
+    <ellipse cx="760" cy="730" rx="520" ry="260" fill="#0EA5E9"/>
+  </g>
+  <path d="M0 670C210 620 320 560 510 590C760 630 900 770 1150 760C1320 752 1460 700 1600 640V900H0V670Z" fill="url(#wave)"/>
+  <defs>
+    <linearGradient id="wave" x1="800" y1="560" x2="800" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111C3A" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#060B17" stop-opacity="0.95"/>
+    </linearGradient>
+    <filter id="blurA" x="-300" y="-280" width="1080" height="840" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="100"/>
+    </filter>
+    <filter id="blurB" x="700" y="-210" width="1160" height="860" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="100"/>
+    </filter>
+    <filter id="blurC" x="40" y="270" width="1440" height="920" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="110"/>
+    </filter>
+  </defs>
+</svg>

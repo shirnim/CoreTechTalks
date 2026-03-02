@@ -3,22 +3,22 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0073e6', // A clean, modern blue
+      main: '#38bdf8',
     },
     secondary: {
-      main: '#ff4f5a', // A vibrant, attention-grabbing accent color
+      main: '#a78bfa',
     },
     background: {
-      default: '#121212', // A dark, professional background
-      paper: '#1e1e1e',   // A slightly lighter dark for paper elements
+      default: '#060b17',
+      paper: '#111a2f',
     },
     text: {
-      primary: '#ffffff', // White for primary text
-      secondary: '#bbbbbb', // Lighter grey for secondary text
+      primary: '#eaf1ff',
+      secondary: '#a8b8d8',
     },
   },
   typography: {
-    fontFamily: 'Poppins, sans-serif', // A modern, geometric sans-serif font
+    fontFamily: 'Poppins, sans-serif',
     h1: {
       fontSize: '3rem',
       fontWeight: 700,
@@ -42,13 +42,41 @@ const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 8, // Slightly rounded corners for a modern look
+    borderRadius: 12,
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          color: '#eaf1ff',
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none', // More readable button text
+          textTransform: 'none',
+          borderRadius: 999,
+          fontWeight: 600,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'none',
+          backgroundColor: 'rgba(16, 25, 47, 0.78)',
+          border: '1px solid rgba(153, 177, 255, 0.2)',
+          backdropFilter: 'blur(8px)',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgba(16, 25, 47, 0.72)',
+          border: '1px solid rgba(153, 177, 255, 0.2)',
+          backdropFilter: 'blur(8px)',
         },
       },
     },

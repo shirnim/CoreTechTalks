@@ -7,10 +7,12 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#f8f9fa',
+        backgroundColor: 'rgba(6, 11, 23, 0.92)',
+        backgroundImage: "linear-gradient(rgba(6, 11, 23, 0.88), rgba(6, 11, 23, 0.98)), url('/bg-grid.svg')",
+        backgroundSize: 'cover',
         p: 6,
         mt: 'auto',
-        borderTop: '1px solid #e0e0e0',
+        borderTop: '1px solid rgba(153, 177, 255, 0.2)',
       }}
       component="footer"
     >
@@ -28,12 +30,12 @@ const Footer = () => {
             <Typography variant="h6" gutterBottom>
               Quick Links
             </Typography>
-            <Link href="/" color="inherit" display="block">Home</Link>
-            <Link href="/about" color="inherit" display="block">About</Link>
-            <Link href="/services" color="inherit" display="block">Services</Link>
-            <Link href="/blogs" color="inherit" display="block">Blogs</Link>
-            <Link href="/tools" color="inherit" display="block">Tools</Link>
-            <Link href="/contact" color="inherit" display="block">Contact</Link>
+            <Link href="/" color="inherit" display="block" underline="hover">Home</Link>
+            <Link href="/about" color="inherit" display="block" underline="hover">About</Link>
+            <Link href="/services" color="inherit" display="block" underline="hover">Services</Link>
+            <Link href="/blogs" color="inherit" display="block" underline="hover">Blogs</Link>
+            <Link href="/tools" color="inherit" display="block" underline="hover">Tools</Link>
+            <Link href="/contact" color="inherit" display="block" underline="hover">Contact</Link>
           </Grid>
           <Grid item xs={12} md={4}>
             <Typography variant="h6" gutterBottom>

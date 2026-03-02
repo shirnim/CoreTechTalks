@@ -6,9 +6,9 @@ import { ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
 
 const Home = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className="page-shell" sx={{ flexGrow: 1 }}>
       {/* Hero Section */}
-      <Box sx={{ py: 12, textAlign: 'center', backgroundColor: 'background.paper' }}>
+      <Box className="hero-section" sx={{ py: 12, textAlign: 'center' }}>
         <Container maxWidth="md">
           <Typography variant="h1" component="h1" gutterBottom>
             Welcome to CoreTechTalks
@@ -72,7 +72,7 @@ const Home = () => {
       </Box>
 
       {/* CTA Section */}
-      <Box sx={{ py: 12, textAlign: 'center', backgroundColor: 'background.paper' }}>
+      <Box sx={{ py: 12, textAlign: 'center', backgroundColor: 'rgba(9, 14, 29, 0.85)', borderTop: '1px solid rgba(153, 177, 255, 0.15)' }}>
         <Container maxWidth="md">
           <Typography variant="h3" component="h2" gutterBottom>
             Ready to start a project?

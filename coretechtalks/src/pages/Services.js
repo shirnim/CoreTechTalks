@@ -28,7 +28,7 @@ const services = [
 
 const Services = () => {
   return (
-    <Box sx={{ flexGrow: 1, py: 8, backgroundColor: 'background.default' }}>
+    <Box className="page-shell" sx={{ flexGrow: 1, py: 8, backgroundColor: 'transparent' }}>
       <Container maxWidth="lg">
         <Typography variant="h2" component="h1" align="center" gutterBottom>
           Our Services

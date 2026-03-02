@@ -42,14 +42,40 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
+      <AppBar
+        position="sticky"
+        color="transparent"
+        elevation={0}
+        sx={{
+          backdropFilter: 'blur(10px)',
+          backgroundColor: 'rgba(6, 11, 23, 0.82)',
+          borderBottom: '1px solid rgba(153, 177, 255, 0.2)',
+        }}
+      >
         <Toolbar>
-          <Typography variant="h6" component={Link} to="/" sx={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}>
+          <Typography
+            variant="h6"
+            component={Link}
+            to="/"
+            sx={{
+              flexGrow: 1,
+              textDecoration: 'none',
+              color: 'text.primary',
+              fontWeight: 700,
+              letterSpacing: '0.01em',
+            }}
+          >
             CoreTechTalks
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             {navLinks.map((link) => (
-              <Button color="inherit" component={Link} to={link.path} key={link.title} sx={{ ml: 2 }}>
+              <Button
+                color="inherit"
+                component={Link}
+                to={link.path}
+                key={link.title}
+                sx={{ ml: 2, color: 'text.primary' }}
+              >
                 {link.title}
               </Button>
             ))}
@@ -69,6 +95,13 @@ const Navbar = () => {
         anchor="right"
         open={drawerOpen}
         onClose={toggleDrawer(false)}
+        PaperProps={{
+          sx: {
+            backgroundColor: 'rgba(6, 11, 23, 0.96)',
+            color: 'text.primary',
+            borderLeft: '1px solid rgba(153, 177, 255, 0.2)',
+          },
+        }}
       >
         {drawer}
       </Drawer>

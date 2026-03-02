@@ -4,7 +4,7 @@ import { Box, Typography, Container, Grid, Avatar } from '@mui/material';
 
 const About = () => {
   return (
-    <Box sx={{ flexGrow: 1, py: 8, backgroundColor: 'background.default' }}>
+    <Box className="page-shell" sx={{ flexGrow: 1, py: 8, backgroundColor: 'transparent' }}>
       <Container maxWidth="lg">
         <Grid container spacing={8} alignItems="center">
           <Grid item xs={12} md={6}>

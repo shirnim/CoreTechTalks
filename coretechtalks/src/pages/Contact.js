@@ -5,7 +5,7 @@ import { Email, Phone, LocationOn } from '@mui/icons-material';
 
 const Contact = () => {
   return (
-    <Box sx={{ flexGrow: 1, py: 8, backgroundColor: 'background.default' }}>
+    <Box className="page-shell" sx={{ flexGrow: 1, py: 8, backgroundColor: 'transparent' }}>
       <Container maxWidth="lg">
         <Grid container spacing={8}>
           <Grid item xs={12} md={6}>
