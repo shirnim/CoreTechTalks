@@ -1,4 +1,3 @@
-
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -10,12 +9,12 @@ const theme = createTheme({
       main: '#ff4f5a', // A vibrant, attention-grabbing accent color
     },
     background: {
-      default: '#ffffff', // A clean, white background
-      paper: '#f8f9fa',   // A slightly off-white for paper elements
+      default: '#121212', // A dark, professional background
+      paper: '#1e1e1e',   // A slightly lighter dark for paper elements
     },
     text: {
-      primary: '#333333', // Dark grey for primary text
-      secondary: '#666666', // Lighter grey for secondary text
+      primary: '#ffffff', // White for primary text
+      secondary: '#bbbbbb', // Lighter grey for secondary text
     },
   },
   typography: {
@@ -43,22 +42,13 @@ const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 8, // Softer, more modern rounded corners
+    borderRadius: 8, // Slightly rounded corners for a modern look
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none', // More subtle button text
-          borderRadius: 20,      // Pill-shaped buttons for a modern look
-          padding: '10px 20px',
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          boxShadow: '0 4px 12px rgba(0,0,0,0.08)', // A softer, more subtle shadow
+          textTransform: 'none', // More readable button text
         },
       },
     },
