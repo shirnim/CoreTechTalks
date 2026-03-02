@@ -1,58 +1,67 @@
 import React from 'react';
-import { Box, Typography, Button, Container, Grid, Card, CardContent } from '@mui/material';
+import { Box, Typography, Button, Container, Grid, Card, CardContent, CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { ArrowForward as ArrowForwardIcon, Code as CodeIcon, Brush as BrushIcon, Storage as StorageIcon } from '@mui/icons-material';
 
 const Home = () => {
-  const blogPosts = [
+  const featuredArticle = {
+    title: 'The Definitive Guide to Modern Web Architectures',
+    description: 'Explore the evolution of web development, from monolithic to microservices, and discover the best architecture for your next project.',
+    image: '/placeholder-image-1.jpg', // Placeholder
+    category: 'Web Architecture',
+    readTime: '15 min read',
+  };
+
+  const articles = [
     {
-      title: 'The Future of Web Development',
-      description: 'An in-depth look at emerging trends and technologies shaping the future of the web.',
-      readTime: '8 min read',
-      category: 'Web Development',
-    },
-    {
-      title: 'Mastering React Hooks',
-      description: 'A comprehensive guide to understanding and using React Hooks for more efficient development.',
-      readTime: '12 min read',
-      category: 'React',
-    },
-    {
-      title: 'UI/UX Design Principles for Developers',
-      description: 'Learn key design principles that can help you create more intuitive and user-friendly applications.',
-      readTime: '6 min read',
+      title: 'The Rise of AI in UI/UX Design',
+      description: 'How artificial intelligence is revolutionizing the design process and creating more personalized user experiences.',
+      image: '/placeholder-image-2.jpg',
       category: 'UI/UX',
+      readTime: '8 min read',
+    },
+    {
+      title: 'A Deep Dive into Serverless Technologies',
+      description: 'Everything you need to know about serverless computing, its benefits, and how to get started.',
+      image: '/placeholder-image-3.jpg',
+      category: 'Cloud Computing',
+      readTime: '12 min read',
     },
   ];
 
   const tools = [
     {
-      name: 'Code Formatter',
-      description: 'A powerful tool to format and beautify your code in various languages.',
+      name: 'Code Validator',
+      description: 'Ensure your code meets the latest standards with our powerful and intuitive validator.',
       icon: <CodeIcon fontSize="large" color="primary" />,
     },
     {
-      name: 'Color Palette Generator',
-      description: 'Create stunning color palettes for your projects with ease.',
+      name: 'Design Asset Generator',
+      description: 'Quickly create beautiful design assets, from color palettes to UI elements.',
       icon: <BrushIcon fontSize="large" color="primary" />,
     },
     {
-      name: 'SVG Optimizer',
-      description: 'Optimize your SVG files for web use, reducing their size without losing quality.',
+      name: 'API Load Tester',
+      description: 'Simulate heavy traffic to your API to ensure it's robust and scalable.',
       icon: <StorageIcon fontSize="large" color="primary" />,
     },
   ];
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, overflowX: 'hidden' }}>
       {/* Hero Section */}
-      <Box sx={{ py: { xs: 8, md: 16 }, textAlign: 'center' }}>
+      <Box sx={{ 
+        py: { xs: 8, md: 12 }, 
+        textAlign: 'center',
+        background: 'linear-gradient(180deg, #F1F5F9 0%, #FFFFFF 100%)',
+        mb: 8
+      }}>
         <Container maxWidth="md">
           <Typography variant="h1" component="h1" gutterBottom sx={{ color: 'text.primary' }}>
-            Modern Tech Insights
+            Insights That Build the Future
           </Typography>
-          <Typography variant="h2" component="h2" sx={{ color: 'text.secondary', fontSize: { xs: '24px', md: '30px' }, mb: 4 }}>
-            A blog for developers, designers, and tech enthusiasts.
+          <Typography variant="h2" sx={{ color: 'text.secondary', fontSize: { xs: '22px', md: '32px' }, mb: 4 }}>
+            Your essential source for expert analysis, practical tools, and in-depth guides on modern technology.
           </Typography>
           <Button
             variant="contained"
@@ -62,32 +71,36 @@ const Home = () => {
             size="large"
             endIcon={<ArrowForwardIcon />}
           >
-            Explore All Posts
+            Explore Articles
           </Button>
         </Container>
       </Box>
 
-      {/* Latest Blog Posts */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography variant="h2" component="h2" align="left" gutterBottom sx={{ mb: 6 }}>
-          Latest Posts
-        </Typography>
-        <Grid container spacing={4}>
-          {blogPosts.map((post, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Card component={Link} to="/blogs" sx={{ textDecoration: 'none' }}>
-                <CardContent sx={{ p: 4 }}>
-                  <Typography variant="body2" color="primary" sx={{ mb: 1, fontWeight: 600 }}>
-                    {post.category}
+      {/* Featured Articles Section */}
+      <Container maxWidth="lg" sx={{ mb: 10 }}>
+        <Typography variant="h2" sx={{ mb: 6, textAlign: 'center' }}>Featured Articles</Typography>
+        <Grid container spacing={5} justifyContent="center">
+          {articles.map((article, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card component={Link} to="/blogs" sx={{ textDecoration: 'none', height: '100%' }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={article.image}
+                  alt={article.title}
+                />
+                <CardContent sx={{ p: 3 }}>
+                  <Typography variant="body2" color="primary" sx={{ fontWeight: 600, mb: 1 }}>
+                    {article.category}
                   </Typography>
-                  <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 600, color: 'text.primary' }}>
-                    {post.title}
+                  <Typography variant="h5" component="h3" sx={{ fontWeight: 600, color: 'text.primary', mb: 1 }}>
+                    {article.title}
                   </Typography>
                   <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-                    {post.description}
+                    {article.description}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {post.readTime}
+                    {article.readTime}
                   </Typography>
                 </CardContent>
               </Card>
@@ -95,76 +108,37 @@ const Home = () => {
           ))}
         </Grid>
       </Container>
-
+      
       <hr className="section-divider" />
 
       {/* Tools Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ mb: 6 }}>
-          Our Tools
-        </Typography>
+        <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Typography variant="h2" component="h2">Developer Tools</Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ mt: 1, maxWidth: '600px', mx: 'auto' }}>
+            A collection of powerful tools to streamline your workflow and enhance your productivity.
+          </Typography>
+        </Box>
         <Grid container spacing={4}>
           {tools.map((tool, index) => (
             <Grid item xs={12} md={4} key={index}>
-              <Card>
-                <CardContent sx={{ p: 4, textAlign: 'center' }}>
-                  {tool.icon}
-                  <Typography variant="h6" component="h3" gutterBottom sx={{ mt: 2, fontWeight: 600 }}>
-                    {tool.name}
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    {tool.description}
-                  </Typography>
-                  <Button variant="text" color="primary" component={Link} to="/tools" sx={{ mt: 2 }}>
-                    Learn More
-                  </Button>
-                </CardContent>
+              <Card sx={{ p: 3, textAlign: 'center', height: '100%' }}>
+                {tool.icon}
+                <Typography variant="h6" sx={{ fontWeight: 600, mt: 2, mb: 1 }}>
+                  {tool.name}
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+                  {tool.description}
+                </Typography>
+                <Button variant="text" color="primary" component={Link} to="/tools">
+                  Try Tool
+                </Button>
               </Card>
             </Grid>
           ))}
         </Grid>
       </Container>
 
-      <hr className="section-divider" />
-
-      {/* Services Section */}
-      <Container maxWidth="lg" sx={{ py: 8, textAlign: 'center' }}>
-        <Typography variant="h2" component="h2" gutterBottom sx={{ mb: 6 }}>
-          Our Services
-        </Typography>
-        <Grid container spacing={4} justifyContent="center">
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent sx={{ p: 4 }}>
-                <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
-                  Web Development
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  We build modern, responsive, and high-performing websites tailored to your needs.
-                </Typography>
-                <Button variant="contained" color="primary" component={Link} to="/services" sx={{ mt: 3 }}>
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent sx={{ p: 4 }}>
-                <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
-                  UI/UX Design
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  We design beautiful and user-friendly interfaces that provide a seamless user experience.
-                </Typography>
-                <Button variant="contained" color="primary" component={Link} to="/services" sx={{ mt: 3 }}>
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
     </Box>
   );
 };

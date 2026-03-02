@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F1F5F9; /* Soft Neutral Background */
+  background-color: #F1F5F9; /* Soft Neutral Gray */
 }
 
 #root {
@@ -17,6 +17,6 @@ body {
 .section-divider {
   border: 0;
   height: 1px;
-  background-color: #E2E8F0; /* Slate 200 */
+  background-color: transparent;
   margin: 64px 0;
 }

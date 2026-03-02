@@ -14,12 +14,10 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { title: 'Home', path: '/' },
-    { title: 'About', path: '/about' },
-    { title: 'Services', path: '/services' },
-    { title: 'Blogs', path: '/blogs' },
+    { title: 'Blog', path: '/blogs' },
     { title: 'Tools', path: '/tools' },
-    { title: 'Contact', path: '/contact' },
+    { title: 'Services', path: '/services' },
+    { title: 'About', path: '/about' },
   ];
 
   const drawer = (
@@ -37,6 +35,11 @@ const Navbar = () => {
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem disablePadding sx={{ mt: 2 }}>
+          <ListItemButton component={Link} to="/contact">
+            <Button variant="contained" color="primary" fullWidth>Subscribe</Button>
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -45,12 +48,11 @@ const Navbar = () => {
     <>
       <AppBar
         position="sticky"
-        color="transparent"
         elevation={0}
         sx={{
-          backdropFilter: 'blur(12px)',
-          backgroundColor: 'rgba(241, 245, 249, 0.8)',
-          borderBottom: '1px solid #E2E8F0', // Slate 200
+          backgroundColor: 'rgba(241, 245, 249, 0.7)', // Semi-transparent background
+          backdropFilter: 'blur(10px)', 
+          borderBottom: '1px solid #E2E8F0', // Soft border
         }}
       >
         <Container maxWidth="lg">
@@ -68,7 +70,7 @@ const Navbar = () => {
             >
               CoreTechTalks
             </Typography>
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
               {navLinks.map((link) => (
                 <Button
                   component={Link}
@@ -77,16 +79,25 @@ const Navbar = () => {
                   sx={{
                     color: 'text.secondary',
                     fontWeight: 500,
-                    ml: 2,
+                    ml: 3,
                     '&:hover': {
                       color: 'text.primary',
-                      backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                      backgroundColor: 'transparent',
                     },
                   }}
                 >
                   {link.title}
                 </Button>
               ))}
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/contact"
+                sx={{ ml: 3 }}
+              >
+                Subscribe
+              </Button>
             </Box>
             <IconButton
               edge="end"
@@ -106,7 +117,7 @@ const Navbar = () => {
         onClose={toggleDrawer(false)}
         PaperProps={{
           sx: {
-            backgroundColor: '#F8FAFC',
+            backgroundColor: '#F8FAFC', // Soft neutral gray for drawer
           },
         }}
       >
