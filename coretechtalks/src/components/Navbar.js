@@ -37,7 +37,7 @@ const Navbar = () => {
         ))}
         <ListItem disablePadding sx={{ mt: 2 }}>
           <ListItemButton component={Link} to="/contact">
-            <Button variant="contained" color="primary" fullWidth>Subscribe</Button>
+            <Button variant="contained" color="primary" fullWidth>Contact</Button>
           </ListItemButton>
         </ListItem>
       </List>
@@ -96,7 +96,7 @@ const Navbar = () => {
                 to="/contact"
                 sx={{ ml: 3 }}
               >
-                Subscribe
+                Contact
               </Button>
             </Box>
             <IconButton
