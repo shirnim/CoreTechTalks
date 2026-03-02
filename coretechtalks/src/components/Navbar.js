@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
@@ -25,15 +24,17 @@ const Navbar = () => {
 
   const drawer = (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 250, pt: 4 }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
         {navLinks.map((link) => (
-          <ListItem button component={Link} to={link.path} key={link.title}>
-            <ListItemText primary={link.title} />
+          <ListItem key={link.title} disablePadding>
+            <ListItemButton component={Link} to={link.path}>
+              <ListItemText primary={link.title} sx={{ textAlign: 'center' }} />
+            </ListItemButton>
           </ListItem>
         ))}
       </List>
@@ -47,49 +48,57 @@ const Navbar = () => {
         color="transparent"
         elevation={0}
         sx={{
-          backdropFilter: 'blur(10px)',
-          backgroundColor: 'rgba(6, 11, 23, 0.82)',
-          borderBottom: '1px solid rgba(153, 177, 255, 0.2)',
+          backdropFilter: 'blur(12px)',
+          backgroundColor: 'rgba(241, 245, 249, 0.8)',
+          borderBottom: '1px solid #E2E8F0', // Slate 200
         }}
       >
-        <Toolbar>
-          <Typography
-            variant="h6"
-            component={Link}
-            to="/"
-            sx={{
-              flexGrow: 1,
-              textDecoration: 'none',
-              color: 'text.primary',
-              fontWeight: 700,
-              letterSpacing: '0.01em',
-            }}
-          >
-            CoreTechTalks
-          </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            {navLinks.map((link) => (
-              <Button
-                color="inherit"
-                component={Link}
-                to={link.path}
-                key={link.title}
-                sx={{ ml: 2, color: 'text.primary' }}
-              >
-                {link.title}
-              </Button>
-            ))}
-          </Box>
-          <IconButton
-            edge="end"
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleDrawer(true)}
-            sx={{ display: { xs: 'block', md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
+        <Container maxWidth="lg">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              component={Link}
+              to="/"
+              sx={{
+                flexGrow: 1,
+                textDecoration: 'none',
+                color: 'text.primary',
+                fontWeight: 700,
+              }}
+            >
+              CoreTechTalks
+            </Typography>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              {navLinks.map((link) => (
+                <Button
+                  component={Link}
+                  to={link.path}
+                  key={link.title}
+                  sx={{
+                    color: 'text.secondary',
+                    fontWeight: 500,
+                    ml: 2,
+                    '&:hover': {
+                      color: 'text.primary',
+                      backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    },
+                  }}
+                >
+                  {link.title}
+                </Button>
+              ))}
+            </Box>
+            <IconButton
+              edge="end"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
+              sx={{ display: { xs: 'block', md: 'none' }, color: 'text.primary' }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </Container>
       </AppBar>
       <Drawer
         anchor="right"
@@ -97,9 +106,7 @@ const Navbar = () => {
         onClose={toggleDrawer(false)}
         PaperProps={{
           sx: {
-            backgroundColor: 'rgba(6, 11, 23, 0.96)',
-            color: 'text.primary',
-            borderLeft: '1px solid rgba(153, 177, 255, 0.2)',
+            backgroundColor: '#F8FAFC',
           },
         }}
       >

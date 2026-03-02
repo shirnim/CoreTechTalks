@@ -3,73 +3,75 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#00f5a0', // A vibrant green/cyan
+      main: '#4F46E5', // Deep Indigo
     },
     secondary: {
-      main: '#ff007a', // A vibrant pink
+      main: '#2563EB', // Professional Blue
     },
     background: {
-      default: '#0a0f23', // A deep, dark blue
-      paper: '#161d3f',   // A slightly lighter, saturated blue for paper
+      default: '#F1F5F9', // Soft Neutral Background
+      paper: '#FFFFFF',    // White Elevated Cards
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#b3b8d4',
+      primary: '#1E293B', // Slate 800
+      secondary: '#64748B', // Slate 500
     },
   },
   typography: {
-    fontFamily: 'Poppins, sans-serif',
+    fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     h1: {
-      fontSize: '3rem',
+      fontSize: '44px',
       fontWeight: 700,
-      letterSpacing: '-0.02em',
     },
     h2: {
-      fontSize: '2.25rem',
-      fontWeight: 600,
-    },
-    h3: {
-      fontSize: '1.75rem',
-      fontWeight: 600,
-    },
-    h4: {
-      fontSize: '1.5rem',
+      fontSize: '30px',
       fontWeight: 600,
     },
     body1: {
-      fontSize: '1rem',
-      lineHeight: 1.6,
+      fontSize: '18px',
+      lineHeight: 1.7,
+    },
+    body2: {
+      fontSize: '16px',
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 12, // 12px rounded corners
   },
   components: {
-    MuiButton: {
+    MuiContainer: {
       styleOverrides: {
         root: {
-          textTransform: 'none',
-          borderRadius: 999, // Pill-shaped buttons
-          fontWeight: 600,
-        },
-      },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          backgroundImage: 'none',
-          backgroundColor: 'rgba(22, 29, 63, 0.78)', // Corresponds to paper background
-          border: '1px solid rgba(179, 184, 212, 0.2)',
-          backdropFilter: 'blur(12px)',
+          maxWidth: '1200px !important', // Max width for content
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(22, 29, 63, 0.72)', // Corresponds to paper background
-          border: '1px solid rgba(179, 184, 212, 0.2)',
-          backdropFilter: 'blur(12px)',
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+          transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'translateY(-4px)',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)',
+          },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontWeight: 600,
+          borderRadius: '8px',
+          padding: '10px 20px',
+        },
+        containedPrimary: {
+          boxShadow: '0 2px 8px rgba(79, 70, 229, 0.3)',
+          '&:hover': {
+            boxShadow: '0 4px 16px rgba(79, 70, 229, 0.4)',
+          },
         },
       },
     },

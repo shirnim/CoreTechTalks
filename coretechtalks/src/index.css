@@ -1,22 +1,22 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #060b17;
-  background-image: linear-gradient(rgba(6, 11, 23, 0.9), rgba(6, 11, 23, 0.95)), url('./assets/bg-grid.svg');
-  background-size: cover;
-  background-attachment: fixed;
-  color: #eaf1ff;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-color: #F1F5F9; /* Soft Neutral Background */
 }
 
 #root {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-divider {
+  border: 0;
+  height: 1px;
+  background-color: #E2E8F0; /* Slate 200 */
+  margin: 64px 0;
 }

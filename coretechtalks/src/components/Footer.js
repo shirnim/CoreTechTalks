@@ -1,56 +1,37 @@
-
 import React from 'react';
-import { Box, Typography, Container, Link, Grid } from '@mui/material';
+import { Box, Typography, Container, Link, Grid, IconButton } from '@mui/material';
 import { Facebook, Twitter, LinkedIn } from '@mui/icons-material';
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: 'rgba(6, 11, 23, 0.92)',
-        backgroundImage: "linear-gradient(rgba(6, 11, 23, 0.88), rgba(6, 11, 23, 0.98)), url('/bg-grid.svg')",
-        backgroundSize: 'cover',
-        p: 6,
+        backgroundColor: '#FFFFFF', // White background
+        p: { xs: 4, md: 6 },
         mt: 'auto',
-        borderTop: '1px solid rgba(153, 177, 255, 0.2)',
+        borderTop: '1px solid #E2E8F0', // Slate 200
       }}
       component="footer"
     >
       <Container maxWidth="lg">
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              CoreTechTalks
-            </Typography>
+        <Grid container spacing={4} justifyContent="space-between" alignItems="center">
+          <Grid item xs={12} md={6}>
             <Typography variant="body2" color="text.secondary">
-              Your go-to resource for the latest in tech. We cover everything from software development to AI and beyond.
+              © {new Date().getFullYear()} CoreTechTalks. All rights reserved.
             </Typography>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Quick Links
-            </Typography>
-            <Link href="/" color="inherit" display="block" underline="hover">Home</Link>
-            <Link href="/about" color="inherit" display="block" underline="hover">About</Link>
-            <Link href="/services" color="inherit" display="block" underline="hover">Services</Link>
-            <Link href="/blogs" color="inherit" display="block" underline="hover">Blogs</Link>
-            <Link href="/tools" color="inherit" display="block" underline="hover">Tools</Link>
-            <Link href="/contact" color="inherit" display="block" underline="hover">Contact</Link>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Follow Us
-            </Typography>
-            <Link href="https://www.facebook.com/" color="inherit" sx={{ mr: 2 }}><Facebook /></Link>
-            <Link href="https://www.twitter.com/" color="inherit" sx={{ mr: 2 }}><Twitter /></Link>
-            <Link href="https://www.linkedin.com/" color="inherit"><LinkedIn /></Link>
+          <Grid item xs={12} md={6} sx={{ textAlign: { xs: 'center', md: 'right' } }}>
+            <IconButton component={Link} href="https://www.facebook.com/" target="_blank" sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}>
+              <Facebook />
+            </IconButton>
+            <IconButton component={Link} href="https://www.twitter.com/" target="_blank" sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}>
+              <Twitter />
+            </IconButton>
+            <IconButton component={Link} href="https://www.linkedin.com/" target="_blank" sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}>
+              <LinkedIn />
+            </IconButton>
           </Grid>
         </Grid>
-        <Box mt={4}>
-          <Typography variant="body2" color="text.secondary" align="center">
-            © {new Date().getFullYear()} CoreTechTalks. All rights reserved.
-          </Typography>
-        </Box>
       </Container>
     </Box>
   );
