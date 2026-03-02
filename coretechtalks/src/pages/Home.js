@@ -42,7 +42,7 @@ const Home = () => {
     },
     {
       name: 'API Load Tester',
-      description: 'Simulate heavy traffic to your API to ensure it's robust and scalable.',
+      description: 'Simulate heavy traffic to your API to ensure it\'s robust and scalable.',
       icon: <StorageIcon fontSize="large" color="primary" />,
     },
   ];
