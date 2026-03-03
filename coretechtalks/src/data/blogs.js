@@ -2,53 +2,37 @@
 export const blogs = [
   {
     id: 1,
-    slug: 'getting-started-with-react',
-    title: "Getting Started with React: A Beginner's Guide",
-    excerpt: 'A comprehensive introduction to setting up your first React application and understanding its core concepts.',
+    title: "The Anatomy of a Modern Web Application",
+    slug: "anatomy-of-a-modern-web-app",
+    excerpt: "A deep dive into the architecture, technologies, and best practices that power today's most successful web applications.",
     content: `
-      React is a powerful JavaScript library for building user interfaces. This guide will walk you through the basics of creating a new React project, understanding components, and managing state. 
-      <br/><br/>
-      We'll cover JSX, props, and the component lifecycle to give you a solid foundation. By the end, you'll be able to build simple, interactive web applications.
+      <h3>Introduction</h3>
+      <p>Modern web applications are complex ecosystems, weaving together front-end frameworks, back-end services, databases, and deployment pipelines. This article breaks down the essential components of a typical high-performance web application, using our own site as a case study.</p>
+
+      <h3>Core Components</h3>
+      <p>At its heart, a modern web app consists of several key layers:</p>
+      <ul>
+        <li><strong>Front-End Framework:</strong> We use React with Material-UI to create a dynamic, responsive user interface. This combination allows for rapid development and a consistent, high-quality user experience across all devices.</li>
+        <li><strong>Back-End API:</strong> A robust API serves as the bridge between the front-end and the database. While this demo is a static site, a real-world application would use a Node.js/Express or Python/Django server to handle business logic and data processing.</li>
+        <li><strong>Database:</strong> The choice of database depends on the application's needs. For CoreTechTalks, a document-oriented database like MongoDB or a relational database like PostgreSQL would be suitable for managing blog posts, user data, and more.</li>
+        <li><strong>Deployment & Hosting:</strong> We leverage Firebase Hosting for its speed, reliability, and seamless integration with modern development workflows. Continuous Integration/Continuous Deployment (CI/CD) pipelines automate the build and deploy process, ensuring updates are delivered quickly and efficiently.</li>
+      </ul>
+
+      <h3>Best Practices</h3>
+      <p>To ensure scalability and maintainability, we adhere to several best practices:</p>
+      <ul>
+        <li><strong>Component-Based Architecture:</strong> Breaking the UI into reusable components (like our Navbar and Footer) simplifies development and testing.</li>
+        <li><strong>State Management:</strong> For complex applications, a state management library like Redux or Zustand is crucial for managing application state in a predictable way.</li>
+        <li><strong>Clean Code and Modularity:</strong> Writing clean, well-documented code and organizing the project into logical modules makes the codebase easier to understand and maintain over time.</li>
+      </ul>
+
+      <p>By understanding these core concepts, you can build web applications that are not only functional but also scalable, maintainable, and enjoyable to use. Thank you for exploring the anatomy of our web application.</p>
     `,
-    author: 'John Doe',
-    date: 'October 26, 2023',
-    image: '/placeholder-image-4.jpg',
-    category: 'React',
-    readTime: '10 min read',
-    authorAvatar: '/john-doe.jpg',
-  },
-  {
-    id: 2,
-    slug: 'the-evolution-of-nodejs',
-    title: 'The Evolution of Node.js: A Look at the Last Decade',
-    excerpt: 'An in-depth look at the runtime environment that has revolutionized web development and its journey over the years.',
-    content: `
-      Node.js has come a long way since its inception. This article explores its journey, from a simple server-side JavaScript runtime to a mature platform for building scalable network applications.
-      <br/><br/>
-      We'll discuss key milestones, the impact of the V8 engine, and how the Node.js ecosystem has grown to become one of the largest in the world.
-    `,
-    author: 'Jane Smith',
-    date: 'October 28, 2023',
-    image: '/placeholder-image-5.jpg',
-    category: 'Node.js',
-    readTime: '15 min read',
-    authorAvatar: '/jane-smith.jpg',
-  },
-  {
-    id: 3,
-    slug: 'ui-ux-best-practices',
-    title: 'UI/UX Best Practices for High-Converting Landing Pages',
-    excerpt: 'Learn the design secrets behind landing pages that not only look good but also drive user action and conversions.',
-    content: `
-      A great landing page is more than just aesthetics; it's about creating a seamless user experience that guides visitors toward a specific goal. 
-      <br/><br/>
-      In this article, we'll dive into the essential UI/UX principles for designing landing pages that convert, including clear calls-to-action, compelling copy, and intuitive navigation.
-    `,
-    author: 'Alex Johnson',
-    date: 'October 29, 2023',
-    image: '/placeholder-image-6.jpg',
-    category: 'UI/UX Design',
-    readTime: '12 min read',
-    authorAvatar: '/alex-johnson.jpg',
-  },
+    author: "CoreTechTalks Team",
+    authorAvatar: "/author-avatar.jpg",
+    date: "October 26, 2023",
+    category: "Web Development",
+    readTime: "12 min read",
+    image: "/placeholder-image.jpg"
+  }
 ];
