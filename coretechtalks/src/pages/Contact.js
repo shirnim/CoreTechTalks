@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Container, Paper, TextField, Button, Link } from '@mui/material';
+import { Box, Typography, Container, Paper, Link } from '@mui/material';
 
 const Contact = () => {
   return (
@@ -31,12 +31,12 @@ const Contact = () => {
               fontSize: { xs: '18px', md: '20px' }, 
               maxWidth: '600px', 
               mx: 'auto', 
-              mb: 4 
+              mb: 5
             }}
           >
             Have a project in mind or a question about our services? We’d love to hear from you.
           </Typography>
-          <Box sx={{ my: 4 }}>
+          <Box>
             <Link 
               href="mailto:coretechtalks@coretechtalks.com" 
               variant="h5" 
@@ -51,20 +51,16 @@ const Contact = () => {
             >
               coretechtalks@coretechtalks.com
             </Link>
-          </Box>
-          <form noValidate autoComplete="off" style={{ maxWidth: '600px', margin: '0 auto' }}>
-            <TextField fullWidth label="Name" margin="normal" />
-            <TextField fullWidth label="Email" margin="normal" />
-            <TextField fullWidth label="Message" margin="normal" multiline rows={4} />
-            <Button 
-              variant="contained" 
-              color="primary" 
-              fullWidth 
-              sx={{ mt: 2, py: 1.5 }}
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+                mt: 1.5,
+              }}
             >
-              Submit
-            </Button>
-          </form>
+              We typically respond within 24–48 hours.
+            </Typography>
+          </Box>
         </Paper>
       </Container>
     </Box>
