@@ -37,7 +37,32 @@ const BlogDetail = () => {
             alt={blog.title}
             sx={{ width: '100%', height: 'auto', mb: 4, borderRadius: 1 }}
           />
-          <Typography variant="body1" sx={{ lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: blog.content }} />
+          <Box
+            sx={{
+              lineHeight: 1.8,
+              '& h2': {
+                fontSize: '1.75rem',
+                fontWeight: 600,
+                my: 3,
+              },
+              '& h3': {
+                fontSize: '1.5rem',
+                fontWeight: 600,
+                my: 2,
+              },
+              '& p': {
+                mb: 2,
+              },
+              '& ul, & ol': {
+                pl: 3,
+                mb: 2,
+              },
+              '& li': {
+                mb: 1,
+              },
+            }}
+            dangerouslySetInnerHTML={{ __html: blog.content }}
+          />
         </Paper>
       </Container>
     </Box>
