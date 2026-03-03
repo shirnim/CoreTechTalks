@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, Container, Paper, Avatar, Grid } from '@mui/material';
+import { Box, Typography, Container, Paper, Grid } from '@mui/material';
 import { blogs } from '../data/blogs';
 
 const BlogDetail = () => {
@@ -24,19 +24,24 @@ const BlogDetail = () => {
           </Typography>
           <Grid container alignItems="center" spacing={2} sx={{ mb: 2 }}>
             <Grid item>
-              <Avatar src={blog.authorAvatar} alt={blog.author} />
-            </Grid>
-            <Grid item>
               <Typography variant="subtitle1">{blog.author}</Typography>
               <Typography variant="subtitle2" color="text.secondary">{blog.date}</Typography>
             </Grid>
           </Grid>
-          <Box
-            component="img"
-            src={blog.image}
-            alt={blog.title}
-            sx={{ width: '100%', height: 'auto', mb: 4, borderRadius: 1 }}
-          />
+          {blog.image && (
+            <Box
+              component="img"
+              src={blog.image}
+              alt={blog.title}
+              sx={{ 
+                width: '100%', 
+                maxHeight: '400px',
+                objectFit: 'cover',
+                borderRadius: '16px',
+                mb: 4, 
+              }}
+            />
+          )}
           <Box
             sx={{
               lineHeight: 1.8,

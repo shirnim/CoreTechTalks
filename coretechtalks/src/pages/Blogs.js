@@ -19,7 +19,7 @@ const Blogs = () => {
                   component={Link} 
                   to={`/blogs/${blog.slug}`}
                   sx={{
-                    display: { xs: 'block', md: 'flex' }, 
+                    display: 'block',
                     mb: 4, 
                     textDecoration: 'none',
                     borderRadius: '16px',
@@ -30,12 +30,20 @@ const Blogs = () => {
                     }
                   }}
                 >
-                  <CardMedia
-                    component="img"
-                    sx={{ width: { xs: '100%', md: 350 }, height: { xs: 200, md: 'auto' }, objectFit: 'cover' }}
-                    image={blog.image}
-                    alt={blog.title}
-                  />
+                  {blog.image && (
+                    <CardMedia
+                      component="img"
+                      sx={{ 
+                        width: '100%', 
+                        height: 200, 
+                        objectFit: 'cover',
+                        borderTopLeftRadius: '12px',
+                        borderTopRightRadius: '12px',
+                      }}
+                      image={blog.image}
+                      alt={blog.title}
+                    />
+                  )}
                   <CardContent sx={{ p: 4, flex: 1 }}>
                     <Typography variant="body2" color="primary" sx={{ fontWeight: 600, mb: 1 }}>
                       {blog.category}
