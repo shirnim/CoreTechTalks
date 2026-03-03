@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Container, Grid, Avatar } from '@mui/material';
+import { Box, Typography, Container, Grid } from '@mui/material';
 
 const About = () => {
   return (
@@ -21,11 +21,27 @@ const About = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Avatar
-              sx={{ width: 250, height: 250, bgcolor: 'primary.main' }}
-              alt="CoreTechTalks Platform"
-              src="/placeholder-image-7.jpg" // A professional placeholder image
-            />
+            <Box
+              sx={{
+                width: '100%',
+                maxWidth: '450px',
+                borderRadius: '16px',
+                overflow: 'hidden',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+              }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Modern technology"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  aspectRatio: '4/3',
+                  objectFit: 'cover',
+                }}
+              />
+            </Box>
           </Grid>
         </Grid>
       </Container>
