@@ -1,6 +1,4 @@
 
-import DataQualityImage from '../assets/blogs/data-quality.svg';
-
 export const blogs = [
   {
   id: 1,
@@ -11,7 +9,7 @@ export const blogs = [
   date: "March 2026",
   category: "Data & Analytics",
   readTime: "6 min read",
-  image: DataQualityImage,
+  image: "/images/data-quality.jpg",
   content: `
     <h2>Introduction: Why I'm Writing This</h2>
     <p>After working in the data quality field for nearly 8 years and leading a data quality team at a reputed organization, I've seen one consistent trend — the lack of awareness among professionals about the real value data quality brings to organizations.</p>

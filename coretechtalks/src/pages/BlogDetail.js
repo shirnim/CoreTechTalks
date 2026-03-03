@@ -9,14 +9,14 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-      <Box className="page-shell" sx={{ flexGrow: 1, py: 8, textAlign: 'center' }}>
+      <Box sx={{ flexGrow: 1, py: 8, textAlign: 'center' }}>
         <Typography variant="h5">Blog post not found</Typography>
       </Box>
     );
   }
 
   return (
-    <Box className="page-shell" sx={{ flexGrow: 1, py: 8, backgroundColor: 'transparent' }}>
+    <Box sx={{ flexGrow: 1, py: 8, backgroundColor: 'transparent' }}>
       <Container maxWidth="md">
         <Paper sx={{ p: { xs: 2, md: 4 } }}>
           <Typography variant="h2" component="h1" gutterBottom>
