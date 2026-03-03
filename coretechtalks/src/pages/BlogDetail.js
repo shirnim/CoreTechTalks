@@ -1,32 +1,11 @@
-
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography, Container, Paper, Avatar, Grid } from '@mui/material';
-
-const blogs = [
-  {
-    id: 1,
-    title: 'Getting Started with React',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...',
-    author: 'John Doe',
-    authorAvatar: '/john-doe.jpg',
-    date: 'October 26, 2023',
-    image: '/react-blog-post.jpg',
-  },
-  {
-    id: 2,
-    title: 'Understanding Node.js',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...',
-    author: 'Jane Smith',
-    authorAvatar: '/jane-smith.jpg',
-    date: 'October 28, 2023',
-    image: '/node-blog-post.jpg',
-  },
-];
+import { blogs } from '../data/blogs';
 
 const BlogDetail = () => {
-  const { id } = useParams();
-  const blog = blogs.find((b) => b.id === parseInt(id));
+  const { slug } = useParams();
+  const blog = blogs.find((b) => b.slug === slug);
 
   if (!blog) {
     return (
@@ -58,9 +37,7 @@ const BlogDetail = () => {
             alt={blog.title}
             sx={{ width: '100%', height: 'auto', mb: 4, borderRadius: 1 }}
           />
-          <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
-            {blog.content}
-          </Typography>
+          <Typography variant="body1" sx={{ lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: blog.content }} />
         </Paper>
       </Container>
     </Box>

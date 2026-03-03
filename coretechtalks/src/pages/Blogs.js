@@ -2,39 +2,7 @@ import React from 'react';
 import { Box, Typography, Container, Grid, Card, CardContent, CardMedia, Button, Divider } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
-
-const blogs = [
-  {
-    id: 1,
-    title: 'Getting Started with React: A Beginner\'s Guide',
-    excerpt: 'A comprehensive introduction to setting up your first React application and understanding its core concepts.',
-    author: 'John Doe',
-    date: 'October 26, 2023',
-    image: '/placeholder-image-4.jpg',
-    category: 'React',
-    readTime: '10 min read',
-  },
-  {
-    id: 2,
-    title: 'The Evolution of Node.js: A Look at the Last Decade',
-    excerpt: 'An in-depth look at the runtime environment that has revolutionized web development and its journey over the years.',
-    author: 'Jane Smith',
-    date: 'October 28, 2023',
-    image: '/placeholder-image-5.jpg',
-    category: 'Node.js',
-    readTime: '15 min read',
-  },
-  {
-    id: 3,
-    title: 'UI/UX Best Practices for High-Converting Landing Pages',
-    excerpt: 'Learn the design secrets behind landing pages that not only look good but also drive user action and conversions.',
-    author: 'Alex Johnson',
-    date: 'November 2, 2023',
-    image: '/placeholder-image-6.jpg',
-    category: 'UI/UX Design',
-    readTime: '8 min read',
-  },
-];
+import { blogs } from '../data/blogs';
 
 const Blogs = () => {
   return (
@@ -49,7 +17,7 @@ const Blogs = () => {
               <Grid item xs={12}>
                 <Card 
                   component={Link} 
-                  to={`/blogs/${blog.id}`}
+                  to={`/blogs/${blog.slug}`}
                   sx={{
                     display: { xs: 'block', md: 'flex' }, 
                     mb: 4, 
