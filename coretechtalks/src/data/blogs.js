@@ -1,38 +1,69 @@
 
 export const blogs = [
   {
-    id: 1,
-    title: "The Anatomy of a Modern Web Application",
-    slug: "anatomy-of-a-modern-web-app",
-    excerpt: "A deep dive into the architecture, technologies, and best practices that power today's most successful web applications.",
-    content: `
-      <h3>Introduction</h3>
-      <p>Modern web applications are complex ecosystems, weaving together front-end frameworks, back-end services, databases, and deployment pipelines. This article breaks down the essential components of a typical high-performance web application, using our own site as a case study.</p>
+  id: 1,
+  title: "Why Data Quality Deserves More Respect",
+  slug: "why-data-quality-deserves-more-respect",
+  excerpt: "A critical but overlooked career path in the data world. Why data quality is the true foundation of data-driven success.",
+  author: "CoreTechTalks",
+  date: "March 2026",
+  category: "Data & Analytics",
+  readTime: "6 min read",
+  content: `
+    <h2>Introduction: Why I'm Writing This</h2>
+    <p>After working in the data quality field for nearly 8 years and leading a data quality team at a reputed organization, I've seen one consistent trend — the lack of awareness among professionals about the real value data quality brings to organizations.</p>
+    <p>Despite being a highly skilled and business-critical role, data quality roles are often overshadowed by more “glamorous” titles like Data Scientist or Data Engineer.</p>
+    <p>This article is my effort to change that narrative.</p>
 
-      <h3>Core Components</h3>
-      <p>At its heart, a modern web app consists of several key layers:</p>
-      <ul>
-        <li><strong>Front-End Framework:</strong> We use React with Material-UI to create a dynamic, responsive user interface. This combination allows for rapid development and a consistent, high-quality user experience across all devices.</li>
-        <li><strong>Back-End API:</strong> A robust API serves as the bridge between the front-end and the database. While this demo is a static site, a real-world application would use a Node.js/Express or Python/Django server to handle business logic and data processing.</li>
-        <li><strong>Database:</strong> The choice of database depends on the application's needs. For CoreTechTalks, a document-oriented database like MongoDB or a relational database like PostgreSQL would be suitable for managing blog posts, user data, and more.</li>
-        <li><strong>Deployment & Hosting:</strong> We leverage Firebase Hosting for its speed, reliability, and seamless integration with modern development workflows. Continuous Integration/Continuous Deployment (CI/CD) pipelines automate the build and deploy process, ensuring updates are delivered quickly and efficiently.</li>
-      </ul>
+    <h2>What is Data Quality, and Why Should You Care?</h2>
+    <p>Data quality refers to how suitable data is for its intended purpose. It is often measured by six key dimensions:</p>
+    <ul>
+      <li>Accuracy</li>
+      <li>Completeness</li>
+      <li>Consistency</li>
+      <li>Timeliness</li>
+      <li>Uniqueness</li>
+      <li>Validity</li>
+    </ul>
 
-      <h3>Best Practices</h3>
-      <p>To ensure scalability and maintainability, we adhere to several best practices:</p>
-      <ul>
-        <li><strong>Component-Based Architecture:</strong> Breaking the UI into reusable components (like our Navbar and Footer) simplifies development and testing.</li>
-        <li><strong>State Management:</strong> For complex applications, a state management library like Redux or Zustand is crucial for managing application state in a predictable way.</li>
-        <li><strong>Clean Code and Modularity:</strong> Writing clean, well-documented code and organizing the project into logical modules makes the codebase easier to understand and maintain over time.</li>
-      </ul>
+    <p>According to Gartner, poor data quality costs businesses an average of $12.9 million per year.</p>
 
-      <p>By understanding these core concepts, you can build web applications that are not only functional but also scalable, maintainable, and enjoyable to use. Thank you for exploring the anatomy of our web application.</p>
-    `,
-    author: "CoreTechTalks Team",
-    authorAvatar: "/author-avatar.jpg",
-    date: "October 26, 2023",
-    category: "Web Development",
-    readTime: "12 min read",
-    image: "/placeholder-image.jpg"
-  }
+    <h2>Data Quality: The Foundation of Data-Driven Success</h2>
+    <ul>
+      <li>Data scientists spend 80% of their time cleaning data</li>
+      <li>Reports become misleading</li>
+      <li>Customer experiences degrade</li>
+      <li>Regulatory violations become likely</li>
+    </ul>
+
+    <h2>Why Data Quality is a Highly Skilled Job</h2>
+    <p>Data quality work is far more complex and technical than many assume.</p>
+    <ul>
+      <li>SQL, Python, Bash scripting</li>
+      <li>ETL pipeline monitoring</li>
+      <li>Tools like Talend, Informatica, Great Expectations</li>
+      <li>Data profiling, lineage, metadata management</li>
+      <li>Cross-team collaboration</li>
+    </ul>
+
+    <h2>Career Opportunities in Data Quality</h2>
+    <ul>
+      <li>Data Quality Analyst</li>
+      <li>Data Steward</li>
+      <li>Data Quality Engineer</li>
+      <li>Data Governance Specialist</li>
+    </ul>
+
+    <h2>The Increasing Importance of Data Quality in the AI Era</h2>
+    <ul>
+      <li>You can't train accurate models with inaccurate data</li>
+      <li>Data quality ensures regulatory compliance</li>
+      <li>DQ professionals are crucial in automated decision-making</li>
+    </ul>
+
+    <h2>Final Thoughts</h2>
+    <p>The world of data doesn't just need more scientists or engineers. It needs people who ensure the data itself is trustworthy.</p>
+    <p><strong>Let’s start giving data quality the recognition it deserves.</strong></p>
+  `
+}
 ];
