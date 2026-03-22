@@ -1,16 +1,16 @@
 
 export const blogs = [
   {
-  id: 1,
-  title: "Why Data Quality Deserves More Respect",
-  slug: "why-data-quality-deserves-more-respect",
-  excerpt: "A critical but overlooked career path in the data world. Why data quality is the true foundation of data-driven success.",
-  author: "CoreTechTalks",
-  date: "March 2026",
-  category: "Data & Analytics",
-  readTime: "6 min read",
-  image: "/images/data-quality.jpg",
-  content: `
+    id: 1,
+    title: "Why Data Quality Deserves More Respect",
+    slug: "why-data-quality-deserves-more-respect",
+    excerpt: "A critical but overlooked career path in the data world. Why data quality is the true foundation of data-driven success.",
+    author: "CoreTechTalks",
+    date: "March 2026",
+    category: "Data & Analytics",
+    readTime: "6 min read",
+    image: "/images/data-quality.jpg",
+    content: `
     <h2>Introduction: Why I'm Writing This</h2>
     <p>After working in the data quality field for nearly 8 years and leading a data quality team at a reputed organization, I've seen one consistent trend — the lack of awareness among professionals about the real value data quality brings to organizations.</p>
     <p>Despite being a highly skilled and business-critical role, data quality roles are often overshadowed by more “glamorous” titles like Data Scientist or Data Engineer.</p>
@@ -66,5 +66,169 @@ export const blogs = [
     <p>The world of data doesn't just need more scientists or engineers. It needs people who ensure the data itself is trustworthy.</p>
     <p><strong>Let’s start giving data quality the recognition it deserves.</strong></p>
   `
-}
+  },
+  {
+    id: 2,
+    title: "Top Python-Based Data Quality Tools Every Data Quality Analyst Should Know",
+    slug: "python-data-quality-tools",
+    excerpt: "Explore the best Python tools for data quality including Great Expectations, Pandera, and PyDeequ.",
+    author: "CoreTechTalks",
+    date: "March 2026",
+    category: "Data & Analytics",
+    readTime: "7 min read",
+    image: "/images/data-quality-tools.jpg",
+    content: `
+      <h2>Introduction</h2>
+<p>As organizations increasingly rely on data-driven decision-making, ensuring data quality has become a critical priority. Poor data quality leads to incorrect insights, unreliable machine learning models, and significant business risks.</p>
+<p>Python, being the backbone of modern data engineering and analytics, offers a rich ecosystem of tools designed specifically for data validation, monitoring, and quality assurance.</p>
+
+<h2>Why Python for Data Quality?</h2>
+<ul>
+  <li>Strong integration with data pipelines (ETL/ELT)</li>
+  <li>Extensive ecosystem (Pandas, PySpark, NumPy)</li>
+  <li>Flexibility for custom validation logic</li>
+  <li>Widely adopted in data engineering workflows</li>
+</ul>
+
+<h2>Top Python-Based Data Quality Tools</h2>
+
+<h3>1. Great Expectations</h3>
+<p>Great Expectations is one of the most widely used data validation frameworks in modern data platforms. It allows teams to define "expectations" (rules) about their data and validate datasets automatically.</p>
+<ul>
+  <li>Declarative validation rules (expect column values, ranges, uniqueness)</li>
+  <li>Auto-generated data documentation</li>
+  <li>Integration with Airflow, Spark, and cloud platforms</li>
+  <li>Strong support for pipeline-based validation</li>
+</ul>
+<p><strong>Best suited for:</strong> Production-grade data pipelines, enterprise data platforms, and teams implementing data governance.</p>
+
+<h3>2. Pandera</h3>
+<p>Pandera is a lightweight and developer-friendly library designed for validating Pandas DataFrames using schema definitions.</p>
+<ul>
+  <li>Schema validation for DataFrames</li>
+  <li>Type checking and constraint enforcement</li>
+  <li>Easy integration with Pandas workflows</li>
+</ul>
+<p><strong>Best suited for:</strong> Data analysts, data scientists, and exploratory data analysis workflows.</p>
+
+<h3>3. PyDeequ</h3>
+<p>PyDeequ is a Python wrapper for Deequ (developed by Amazon), built for large-scale data quality validation on Apache Spark.</p>
+<ul>
+  <li>Scalable validation for big data</li>
+  <li>Constraint suggestion engine</li>
+  <li>Works efficiently on distributed systems</li>
+</ul>
+<p><strong>Best suited for:</strong> Big data environments using Spark and large-scale batch processing.</p>
+
+<h3>4. Soda Core</h3>
+<p>Soda Core is an open-source data quality testing framework that allows you to define checks using SQL and Python.</p>
+<ul>
+  <li>SQL-first approach for data validation</li>
+  <li>Data monitoring and alerting capabilities</li>
+  <li>Works across warehouses like Snowflake, BigQuery</li>
+</ul>
+<p><strong>Best suited for:</strong> Data teams working heavily with SQL-based warehouses and monitoring pipelines.</p>
+
+<h3>5. Cerberus</h3>
+<p>Cerberus is a lightweight validation library focused on validating structured data such as dictionaries and JSON objects.</p>
+<ul>
+  <li>Simple rule-based validation</li>
+  <li>Flexible schema definitions</li>
+  <li>Lightweight and easy to integrate</li>
+</ul>
+<p><strong>Best suited for:</strong> Small applications, API validation, and lightweight data validation needs.</p>
+
+<h2>Comparison of Python Data Quality Tools</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+<tr>
+  <th>Tool</th>
+  <th>Best For</th>
+  <th>Scale</th>
+  <th>Ease of Use</th>
+</tr>
+<tr>
+  <td>Great Expectations</td>
+  <td>Data pipelines & governance</td>
+  <td>Medium to Large</td>
+  <td>Moderate</td>
+</tr>
+<tr>
+  <td>Pandera</td>
+  <td>Pandas validation</td>
+  <td>Small to Medium</td>
+  <td>Easy</td>
+</tr>
+<tr>
+  <td>PyDeequ</td>
+  <td>Big data (Spark)</td>
+  <td>Large</td>
+  <td>Moderate</td>
+</tr>
+<tr>
+  <td>Soda Core</td>
+  <td>SQL + monitoring</td>
+  <td>Medium to Large</td>
+  <td>Easy</td>
+</tr>
+<tr>
+  <td>Cerberus</td>
+  <td>Lightweight validation</td>
+  <td>Small</td>
+  <td>Very Easy</td>
+</tr>
+</table>
+
+<h2>Which Tool Should You Choose?</h2>
+
+<h3>Use Great Expectations if:</h3>
+<ul>
+  <li>You are building production data pipelines</li>
+  <li>You need documentation + validation together</li>
+</ul>
+
+<h3>Use Pandera if:</h3>
+<ul>
+  <li>You work heavily with Pandas</li>
+  <li>You need quick schema validation during analysis</li>
+</ul>
+
+<h3>Use PyDeequ if:</h3>
+<ul>
+  <li>You are working with Spark or big data systems</li>
+  <li>You need scalable validation</li>
+</ul>
+
+<h3>Use Soda Core if:</h3>
+<ul>
+  <li>Your team works with SQL warehouses</li>
+  <li>You want monitoring + alerting</li>
+</ul>
+
+<h3>Use Cerberus if:</h3>
+<ul>
+  <li>You need lightweight validation</li>
+  <li>You are validating JSON or API data</li>
+</ul>
+
+<h2>Real-World Usage Strategy</h2>
+<p>In real-world projects, teams often combine multiple tools:</p>
+<ul>
+  <li>Great Expectations for pipeline validation</li>
+  <li>Pandera for dataframe-level checks</li>
+  <li>Soda Core for monitoring and alerting</li>
+</ul>
+
+<h2>Common Challenges</h2>
+<ul>
+  <li>Defining the right validation rules</li>
+  <li>Handling schema evolution</li>
+  <li>Balancing performance with validation checks</li>
+</ul>
+
+<h2>Final Thoughts</h2>
+<p>There is no single "best" tool for data quality. The right choice depends on your data architecture, scale, and team workflows.</p>
+<p>Python provides a powerful ecosystem that allows teams to build robust, scalable, and reliable data quality systems.</p>
+    `
+  }
 ];
