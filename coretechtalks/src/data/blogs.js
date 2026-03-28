@@ -230,5 +230,126 @@ export const blogs = [
 <p>There is no single "best" tool for data quality. The right choice depends on your data architecture, scale, and team workflows.</p>
 <p>Python provides a powerful ecosystem that allows teams to build robust, scalable, and reliable data quality systems.</p>
     `
+  },
+  {
+    id: 3,
+    title: "Data Quality vs Data Governance: What’s the Real Difference?",
+    slug: "data-quality-vs-data-governance",
+    excerpt: "Understand the key differences between data quality and data governance, with real-world examples, tools, and when to focus on each.",
+    author: "CoreTechTalks",
+    date: "March 2026",
+    category: "Data Quality & Data Governance",
+    readTime: "8 min read",
+    image: "/images/data-quality-vs-governance.jpg",
+    content: `
+<h2>Introduction</h2>
+<p>In the world of data, two terms are often used interchangeably—data quality and data governance. While they are closely related, they serve very different purposes.</p>
+<p>In my experience working with enterprise data systems, this confusion often leads to poorly defined roles, ineffective processes, and gaps in accountability.</p>
+<p>This article breaks down the real difference between data quality and data governance, with practical insights on how they work together.</p>
+
+<h2>What is Data Quality?</h2>
+<p>Data quality refers to how reliable and usable your data is for its intended purpose. It focuses on the condition of the data itself.</p>
+
+<ul>
+  <li>Accuracy — Is the data correct?</li>
+  <li>Completeness — Are all required fields populated?</li>
+  <li>Consistency — Is data aligned across systems?</li>
+  <li>Timeliness — Is data up to date?</li>
+  <li>Validity — Does data follow defined formats?</li>
+  <li>Uniqueness — Are there duplicates?</li>
+</ul>
+
+<p>For example, if a customer’s email is missing or duplicated across systems, that is a data quality issue.</p>
+
+<h2>What is Data Governance?</h2>
+<p>Data governance is about defining the rules, policies, and ownership around data.</p>
+
+<ul>
+  <li>Who owns the data?</li>
+  <li>Who can access it?</li>
+  <li>What standards should it follow?</li>
+  <li>How should it be managed across systems?</li>
+</ul>
+
+<p>If no one is responsible for fixing incorrect customer data, that is a governance issue—not just a quality problem.</p>
+
+<h2>Key Differences</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+<tr>
+  <th>Aspect</th>
+  <th>Data Quality</th>
+  <th>Data Governance</th>
+</tr>
+<tr>
+  <td>Focus</td>
+  <td>Condition of data</td>
+  <td>Control and policies</td>
+</tr>
+<tr>
+  <td>Goal</td>
+  <td>Accurate and usable data</td>
+  <td>Accountability and standards</td>
+</tr>
+<tr>
+  <td>Scope</td>
+  <td>Technical + operational</td>
+  <td>Organizational + strategic</td>
+</tr>
+<tr>
+  <td>Ownership</td>
+  <td>Data engineers / analysts</td>
+  <td>Data stewards / leadership</td>
+</tr>
+</table>
+
+<h2>How They Work Together</h2>
+<p>Data governance defines the rules. Data quality enforces them.</p>
+
+<ul>
+  <li>Governance defines standards</li>
+  <li>Quality checks ensure those standards are met</li>
+</ul>
+
+<p>Without governance, quality efforts become inconsistent. Without quality, governance becomes theoretical.</p>
+
+<h2>Real-World Example</h2>
+<p>In a banking system, governance may define that customer PAN must be mandatory. Data quality processes ensure that:</p>
+<ul>
+  <li>PAN field is not null</li>
+  <li>PAN follows correct format</li>
+  <li>No duplicate PAN exists</li>
+</ul>
+
+<h2>Common Mistakes</h2>
+<ul>
+  <li>Treating data quality as a one-time activity</li>
+  <li>Ignoring ownership and accountability</li>
+  <li>Implementing tools without clear governance</li>
+</ul>
+
+<h2>When to Focus on What</h2>
+
+<h3>Focus on Data Quality if:</h3>
+<ul>
+  <li>You have inaccurate or inconsistent data</li>
+  <li>Reports are unreliable</li>
+  <li>Teams spend time fixing data manually</li>
+</ul>
+
+<h3>Focus on Data Governance if:</h3>
+<ul>
+  <li>There is no clear ownership of data</li>
+  <li>Policies are not defined</li>
+  <li>Different teams follow different standards</li>
+</ul>
+
+<h2>Final Thoughts</h2>
+<p>Data quality and data governance are not competing concepts—they are complementary.</p>
+<p>If you want reliable, scalable, and trustworthy data systems, you need both working together.</p>
+
+<h2>About the Author</h2>
+<p>The author has over 8 years of experience in data quality and data governance, and overall 20+ years of IT experience, working on enterprise-scale data systems.</p>
+`
   }
 ];
