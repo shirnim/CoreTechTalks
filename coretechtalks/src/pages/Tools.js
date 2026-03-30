@@ -1,64 +1,67 @@
-import React from 'react';
-import { Box, Typography, Container, Button, Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, Container, Button, Card, CardContent, CardActions, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { RocketLaunch as RocketLaunchIcon } from '@mui/icons-material';
 
 const Tools = () => {
+  const [tools, setTools] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/tools')
+      .then(res => res.json())
+      .then(data => {
+        setTools(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching tools:", err);
+        setLoading(false);
+      });
+  }, []);
+
   return (
-    <Box sx={{ flexGrow: 1, py: 8, backgroundColor: '#F8FAFC', minHeight: 'calc(100vh - 200px)', display: 'flex', alignItems: 'center' }}>
-      <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-        <Paper 
-          sx={{ 
-            p: { xs: 4, md: 8 }, 
-            borderRadius: '16px', 
-            boxShadow: '0 8px 16px -4px rgba(0,0,0,0.1)'
-          }}
-        >
-          <RocketLaunchIcon sx={{ fontSize: 60, color: 'primary.main', mb: 3 }} />
-          <Typography 
-            variant="h1" 
-            component="h1" 
-            sx={{ 
-              fontWeight: 700, 
-              fontSize: { xs: '36px', md: '44px' }, 
-              mb: 2 
-            }}
-          >
-            Tech Tools Are Coming Soon
-          </Typography>
-          <Typography 
-            variant="h2"
-            sx={{ 
-              color: 'text.secondary', 
-              fontSize: { xs: '18px', md: '20px' }, 
-              maxWidth: '600px', 
-              mx: 'auto', 
-              mb: 4 
-            }}
-          >
-            We’re building powerful tools to help you analyze, optimize, and stay ahead in tech. Stay tuned.
-          </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
-            <Button 
-              variant="contained" 
-              color="primary" 
-              size="large"
-              component={Link}
-              to="/contact"
-            >
-              Notify Me When Tools Launch
-            </Button>
-            <Button 
-              variant="outlined" 
-              color="primary" 
-              size="large"
-              component={Link}
-              to="/blogs"
-            >
-              Explore Our Blog
-            </Button>
-          </Box>
-        </Paper>
+    <Box sx={{ flexGrow: 1, py: 8, backgroundColor: '#F8FAFC', minHeight: 'calc(100vh - 200px)' }}>
+      <Container maxWidth="lg">
+        <Typography variant="h3" component="h1" sx={{ fontWeight: 700, mb: 2, textAlign: 'center' }}>
+          Interactive Tools
+        </Typography>
+        <Typography variant="h6" sx={{ color: 'text.secondary', mb: 6, textAlign: 'center', maxWidth: '600px', mx: 'auto' }}>
+          Explore our suite of live dashboards and automated data workflows.
+        </Typography>
+
+        {loading ? (
+          <Typography textAlign="center">Loading available tools...</Typography>
+        ) : tools.length === 0 ? (
+          <Typography textAlign="center">No tools available yet. Setup backend seeder.</Typography>
+        ) : (
+          <Grid container spacing={4}>
+            {tools.map(tool => (
+              <Grid item xs={12} md={6} key={tool.id}>
+                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 3 }}>
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography variant="h5" component="h2" gutterBottom fontWeight="bold">
+                      {tool.name}
+                    </Typography>
+                    <Typography color="text.secondary">
+                      {tool.description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions sx={{ p: 2 }}>
+                    <Button 
+                      variant="contained" 
+                      color="primary" 
+                      fullWidth 
+                      component={Link} 
+                      to={`/tools/${tool.slug}`}
+                    >
+                      Launch Application
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Container>
     </Box>
   );

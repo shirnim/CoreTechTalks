@@ -10,6 +10,10 @@ import Services from "./pages/Services";
 import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import Tools from "./pages/Tools";
+import ToolDetail from "./pages/ToolDetail";
+import JobAnalyticsTool from "./pages/JobAnalyticsTool";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
 import Contact from "./pages/Contact";
 
 function App() {
@@ -25,6 +29,10 @@ function App() {
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:slug" element={<BlogDetail />} />
             <Route path="/tools" element={<Tools />} />
+            <Route path="/tools/jobs-analytics" element={<JobAnalyticsTool />} />
+            <Route path="/tools/:slug" element={<ToolDetail />} />
+            <Route path="/payment/success" element={<PaymentSuccess />} />
+            <Route path="/payment/cancel" element={<PaymentCancel />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </Box>
