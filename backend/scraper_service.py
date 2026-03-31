@@ -7,58 +7,60 @@ STATE_FILE = "linkedin_state.json"
 
 async def verify_linkedin_credentials(username, password):
     """
-    Attempts to log into LinkedIn. If successful, saves the session cookies to a JSON file.
-    Returns True if authenticated, False if invalid or timed out.
+    Always performs a fresh LinkedIn login.
+    Returns True if authenticated, False if credentials are wrong or timed out.
     """
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=False)
-        
-        if os.path.exists(STATE_FILE):
-            try:
-                context = await browser.new_context(storage_state=STATE_FILE)
-                page = await context.new_page()
-                await page.goto("https://www.linkedin.com/feed/", wait_until="domcontentloaded", timeout=15000)
-                if "feed" in page.url or "jobs" in page.url:
-                    await browser.close()
-                    return True
-                await context.close()
-            except Exception:
-                pass
-
         context = await browser.new_context()
         page = await context.new_page()
 
         try:
             await page.goto("https://www.linkedin.com/login", wait_until="domcontentloaded")
+            await page.wait_for_selector("#username", state="visible", timeout=15000)
+            
+            # Instant fill is much faster, but we need a brief pause before submitting 
+            # so LinkedIn's React frontend registers the text before the click.
             await page.fill("#username", username)
             await page.fill("#password", password)
+            await asyncio.sleep(0.5)
             await page.click("button[type='submit']")
 
             elapsed = 0
             while elapsed < 90:
-                page_content = await page.content()
-                if "error-for-password" in page_content or "error-for-username" in page_content:
+                # Proper visibility check for error elements (they might exist hidden in the DOM normally)
+                pwd_error_visible = False
+                user_error_visible = False
+                try:
+                    pwd_error_visible = await page.locator("#error-for-password").is_visible()
+                    user_error_visible = await page.locator("#error-for-username").is_visible()
+                except Exception:
+                    pass
+
+                if pwd_error_visible or user_error_visible:
+                    print("[Auth Debug] Failed: LinkedIn visibly displayed an invalid credentials error msg.")
+                    await page.screenshot(path="auth_error.png")
                     await browser.close()
                     return False
                 
-                # Success checks (if URL moves away from login/checkpoint screens)
                 if "login" not in page.url and "checkpoint" not in page.url:
                     break
-                
-                await asyncio.sleep(2)
-                elapsed += 2
+                await asyncio.sleep(1)
+                elapsed += 1
 
-            # Check if we finally made it out of the login wall
             if "login" not in page.url:
                 await context.storage_state(path=STATE_FILE)
+                print("[Auth] Login successful — session saved for scraping.")
                 await browser.close()
                 return True
             else:
+                print(f"[Auth Debug] Failed: 90s timeout reached. Still stuck on URL: {page.url}")
+                await page.screenshot(path="auth_error.png")
                 await browser.close()
                 return False
-                
+
         except Exception as e:
-            print("Verify Error:", e)
+            print(f"[Auth Debug] Verify Error Exception: {e}")
             await browser.close()
             return False
 
