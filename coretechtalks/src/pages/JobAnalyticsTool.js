@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { 
   Box, Typography, Container, TextField, Button, Paper, Grid,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination,
-  CircularProgress, Card, CardContent, Tabs, Tab, Autocomplete
+  CircularProgress, Card, CardContent, Tabs, Tab, Autocomplete, Collapse, IconButton, List, ListItem, ListItemIcon, ListItemText, Chip
 } from '@mui/material';
-import { Search, Download, BarChart2 } from 'lucide-react';
+import { Search, Download, BarChart2, ChevronDown, ChevronUp, CheckCircle2, Wrench, Award, CheckSquare } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell
@@ -27,6 +27,110 @@ const COMMON_LOCATIONS = [
 const EXPERIENCE_LEVELS = [
   "Internship", "Entry level", "Associate", "Mid-Senior level", "Director", "Executive"
 ];
+
+const JobRow = ({ job }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <React.Fragment>
+      <TableRow hover sx={{ '& > *': { borderBottom: 'unset' } }}>
+        <TableCell>
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+            {open ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </IconButton>
+        </TableCell>
+        <TableCell>
+          <a href={job.job_link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#1976d2', fontWeight: 500 }}>
+            {job.job_title}
+          </a>
+        </TableCell>
+        <TableCell>{job.company}</TableCell>
+        <TableCell>{job.location}</TableCell>
+        <TableCell>{job.experience}</TableCell>
+        <TableCell>{job.posted_date}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 2, p: 3, backgroundColor: '#f8fafc', borderRadius: 2, border: '1px solid #e2e8f0' }}>
+              <Typography variant="h6" gutterBottom component="div" fontWeight="bold" color="#0f172a">
+                NLP Extracted Job Details
+              </Typography>
+              
+              <Grid container spacing={4} sx={{ mt: 1 }}>
+                <Grid item xs={12} md={6}>
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="subtitle1" fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                      <CheckSquare size={18} style={{ marginRight: 8, color: '#3b82f6' }} /> Responsibilities
+                    </Typography>
+                    {job.responsibilities && job.responsibilities.length > 0 ? (
+                      <List dense disablePadding>
+                        {job.responsibilities.map((req, i) => (
+                          <ListItem key={i} sx={{ px: 0, py: 0.5, alignItems: 'flex-start' }}>
+                            <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}><CheckCircle2 size={14} color="#64748b" /></ListItemIcon>
+                            <ListItemText primary={req} primaryTypographyProps={{ variant: 'body2', color: 'text.secondary' }} />
+                          </ListItem>
+                        ))}
+                      </List>
+                    ) : (
+                      <Typography variant="body2" color="text.secondary" fontStyle="italic">Not extracted</Typography>
+                    )}
+                  </Box>
+                  
+                  <Box>
+                    <Typography variant="subtitle1" fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                      <CheckCircle2 size={18} style={{ marginRight: 8, color: '#10b981' }} /> Qualifications
+                    </Typography>
+                    {job.qualifications && job.qualifications.length > 0 ? (
+                      <List dense disablePadding>
+                        {job.qualifications.map((qual, i) => (
+                          <ListItem key={i} sx={{ px: 0, py: 0.5, alignItems: 'flex-start' }}>
+                            <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}><CheckCircle2 size={14} color="#64748b" /></ListItemIcon>
+                            <ListItemText primary={qual} primaryTypographyProps={{ variant: 'body2', color: 'text.secondary' }} />
+                          </ListItem>
+                        ))}
+                      </List>
+                    ) : (
+                      <Typography variant="body2" color="text.secondary" fontStyle="italic">Not extracted</Typography>
+                    )}
+                  </Box>
+                </Grid>
+                
+                <Grid item xs={12} md={6}>
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="subtitle1" fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
+                      <Wrench size={18} style={{ marginRight: 8, color: '#f59e0b' }} /> Tools & Tech Stack
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {job.tools && job.tools !== "Not specified" ? (
+                        job.tools.split(',').map((tool, i) => (
+                          <Chip key={i} label={tool.trim()} size="small" variant="outlined" sx={{ borderColor: '#cbd5e1', backgroundColor: '#fff' }} />
+                        ))
+                      ) : (
+                        <Typography variant="body2" color="text.secondary" fontStyle="italic">No specific tools mentioned</Typography>
+                      )}
+                    </Box>
+                  </Box>
+                  
+                  <Box>
+                    <Typography variant="subtitle1" fontWeight="bold" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                      <Award size={18} style={{ marginRight: 8, color: '#8b5cf6' }} /> Certifications
+                    </Typography>
+                    {job.certifications && job.certifications !== "None required" ? (
+                      <Typography variant="body2" color="text.secondary">{job.certifications}</Typography>
+                    ) : (
+                      <Typography variant="body2" color="text.secondary" fontStyle="italic">None required</Typography>
+                    )}
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+};
 
 const JobAnalyticsTool = () => {
   const [isLinkedInConnected, setIsLinkedInConnected] = useState(false);
@@ -363,6 +467,7 @@ const JobAnalyticsTool = () => {
                       <Table sx={{ minWidth: 650 }}>
                         <TableHead sx={{ backgroundColor: '#f1f5f9' }}>
                           <TableRow>
+                            <TableCell width={50} />
                             <TableCell sx={{ fontWeight: 'bold' }}>Job Title</TableCell>
                             <TableCell sx={{ fontWeight: 'bold' }}>Company</TableCell>
                             <TableCell sx={{ fontWeight: 'bold' }}>Location</TableCell>
@@ -379,17 +484,7 @@ const JobAnalyticsTool = () => {
                             </TableRow>
                           ) : (
                             jobs.map((job) => (
-                              <TableRow key={job.id} hover>
-                                <TableCell>
-                                  <a href={job.job_link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#1976d2', fontWeight: 500 }}>
-                                    {job.job_title}
-                                  </a>
-                                </TableCell>
-                                <TableCell>{job.company}</TableCell>
-                                <TableCell>{job.location}</TableCell>
-                                <TableCell>{job.experience}</TableCell>
-                                <TableCell>{job.posted_date}</TableCell>
-                              </TableRow>
+                              <JobRow key={job.id} job={job} />
                             ))
                           )}
                         </TableBody>

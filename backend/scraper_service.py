@@ -1,9 +1,81 @@
 import os
+import re
 import asyncio
 from urllib.parse import quote_plus
 from playwright.async_api import async_playwright
 
 STATE_FILE = "linkedin_state.json"
+
+COMMON_TOOLS = [
+    "Python", "Java", "C++", "C#", "JavaScript", "TypeScript", "React", "Angular", "Vue",
+    "Node.js", "Django", "Flask", "Spring", "AWS", "Azure", "GCP", "Google Cloud", 
+    "Docker", "Kubernetes", "SQL", "MySQL", "PostgreSQL", "MongoDB", "Redis", 
+    "Kafka", "Spark", "Hadoop", "Tableau", "PowerBI", "Excel", "Git", "Jenkins", 
+    "CI/CD", "Terraform", "Ansible", "Linux", "Unix", "Jira", "Confluence", "Agile",
+    "Scrum", "Machine Learning", "NLP", "PyTorch", "TensorFlow", "Pandas", "NumPy", "Go", "Rust", "Swift", "Kotlin", "Ruby", "PHP"
+]
+COMMON_CERTS = [
+    "AWS Certified", "PMP", "CISSP", "CISM", "CISA", "CEH", "CompTIA", "CCNA",
+    "CCNP", "Azure Fundamentals", "Google Cloud Certified", "Scrum Master", "CSM"
+]
+
+def apply_nlp_extraction(raw_text: str) -> dict:
+    """
+    Heuristic-based NLP to quickly extract structured sections from a dense job description.
+    """
+    text = raw_text.replace('\u200b', '').strip()
+    lines = [line.strip() for line in text.split('\n') if line.strip()]
+    
+    responsibilities = []
+    qualifications = []
+    current_section = None
+    
+    # State-machine parser to detect section headers and extract subsequent bullets
+    for line in lines:
+        lower_line = line.lower()
+        if any(keyword in lower_line for keyword in ["responsibilities", "what you'll do", "your role", "what you will do"]):
+            if len(line) < 50:
+                current_section = "responsibilities"
+                continue
+        elif any(keyword in lower_line for keyword in ["qualifications", "requirements", "what you need", "who you are", "skills"]):
+            if len(line) < 50:
+                current_section = "qualifications"
+                continue
+        elif len(line) < 50 and line.isupper():
+            current_section = None # Random other uppercase header, stop collecting
+            
+        if current_section == "responsibilities":
+            if line.startswith(('-', '*', '•', '·', 'o', '✓', '->', '=>')) or len(line) > 15:
+                cleaned = re.sub(r'^[-\*•·o✓=><\s]*', '', line).strip()
+                if cleaned: responsibilities.append(cleaned)
+                if len(responsibilities) > 10: current_section = None
+        elif current_section == "qualifications":
+            if line.startswith(('-', '*', '•', '·', 'o', '✓', '->', '=>')) or len(line) > 15:
+                cleaned = re.sub(r'^[-\*•·o✓=><\s]*', '', line).strip()
+                if cleaned: qualifications.append(cleaned)
+                if len(qualifications) > 10: current_section = None
+                    
+    # Keyword extraction (Named Entity Recognition via Dictionary)
+    text_lower = text.lower()
+    
+    found_tools = []
+    for tool in COMMON_TOOLS:
+        lower_tool = tool.lower()
+        # Word boundary regex for exact tool matching (prevents "React" matching inside "Reaction")
+        if re.search(rf'\b{re.escape(lower_tool)}\b', text_lower):
+            found_tools.append(tool)
+            
+    found_certs = []
+    for cert in COMMON_CERTS:
+        if cert.lower() in text_lower:
+            found_certs.append(cert)
+            
+    return {
+        "responsibilities": responsibilities[:5], # Return top 5 bullets
+        "qualifications": qualifications[:5],
+        "tools": ", ".join(found_tools) if found_tools else "Not specified",
+        "certifications": ", ".join(found_certs) if found_certs else "None required",
+    }
 
 async def verify_linkedin_credentials(username, password):
     """
@@ -76,11 +148,25 @@ async def extract_job_details(context, target_url, sem, job_idx, total_jobs):
             "experience": "Not Found",
             "job_type": "Not Found",
             "posted_date": "Not Found",
-            "job_link": target_url
+            "job_link": target_url,
+            "responsibilities": [],
+            "qualifications": [],
+            "tools": "Not specified",
+            "certifications": "None required"
         }
         try:
             await page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
             await asyncio.sleep(3)
+            
+            # Extract Main Description Text for NLP Pipeline
+            # We use full page text because LinkedIn constantly changes description CSS classes
+            try:
+                raw_text = await page.evaluate("document.body.innerText")
+                if raw_text and len(raw_text.strip()) > 50:
+                    nlp_results = apply_nlp_extraction(raw_text)
+                    job_data.update(nlp_results)
+            except Exception as e:
+                print(f"[NLP Extraction] Error parsing description on {target_url}: {e}")
             
             page_title = await page.title()
             try:
@@ -134,7 +220,7 @@ async def execute_live_scrape(username, password, term, location, experience_lev
     CONCURRENT_TABS = 3
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False) 
+        browser = await p.chromium.launch(headless=True) 
         
         # Hydrate session from the persistent JSON file!
         if os.path.exists(STATE_FILE):

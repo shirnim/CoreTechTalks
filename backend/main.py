@@ -296,10 +296,29 @@ def search_jobs(query: JobSearchQuery):
 @app.post("/api/jobs/export")
 def export_jobs(query: JobSearchQuery):
     filtered = _filter_jobs(query)
-    df = pd.DataFrame(filtered)
+    
+    # Format list fields (like NLP extracted attributes) into cleanly formatted Excel cell strings
+    export_data = []
+    for job in filtered:
+        job_copy = job.copy()
+        if "responsibilities" in job_copy and isinstance(job_copy["responsibilities"], list):
+            job_copy["responsibilities"] = "\n".join([f"• {item}" for item in job_copy["responsibilities"]])
+        if "qualifications" in job_copy and isinstance(job_copy["qualifications"], list):
+            job_copy["qualifications"] = "\n".join([f"• {item}" for item in job_copy["qualifications"]])
+        
+        export_data.append(job_copy)
+        
+    df = pd.DataFrame(export_data)
     output = BytesIO()
     with pd.ExcelWriter(output, engine='openpyxl') as writer:
         df.to_excel(writer, index=False, sheet_name='Jobs')
+        
+        # Optional: Set text wrapping for the new NLP columns if they exist
+        worksheet = writer.sheets['Jobs']
+        for row in worksheet.iter_rows():
+            for cell in row:
+                cell.alignment = cell.alignment.copy(wrapText=True)
+
     output.seek(0)
     
     headers = {
