@@ -15,6 +15,14 @@ def seed():
             "features": "Interactive Dashboard, Real-time Search, Pandas Aggregations, Custom Excel Export",
             "price": 0.0,
             "file_path": ""
+        },
+        {
+            "slug": "rent-agreement-detector",
+            "name": "Rent Agreement Red Flag Detector",
+            "description": "Upload a rent agreement PDF to get a plain English summary, highlighted risky clauses, and a tenant rights checklist.",
+            "features": "AI-Powered PDF Analysis, Structured Risk Scoring, Tenant Rights Checklist",
+            "price": 0.0,
+            "file_path": ""
         }
     ]
     

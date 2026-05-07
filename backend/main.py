@@ -7,7 +7,7 @@ if sys.platform == 'win32':
 
 import uuid
 from datetime import datetime, timedelta, timezone
-from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks
+from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
@@ -399,6 +399,68 @@ def analyze_jobs(query: JobSearchQuery):
         "sample_responsibilities": sample_resps,
         "sample_qualifications": sample_quals
     }
+
+@app.post("/api/rent-agreement/analyze")
+async def analyze_rent_agreement(file: UploadFile = File(...)):
+    import pypdf
+    from openai import AsyncOpenAI
+    import json
+    
+    if not file.filename.endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
+        
+    if not os.getenv("OPENAI_API_KEY"):
+        raise HTTPException(status_code=500, detail="OpenAI API key not configured on the server.")
+        
+    try:
+        pdf_reader = pypdf.PdfReader(file.file)
+        text = ""
+        for page in pdf_reader.pages:
+            extracted = page.extract_text()
+            if extracted:
+                text += extracted + "\n"
+            
+        if not text.strip():
+            raise HTTPException(status_code=400, detail="Could not extract text from the PDF.")
+            
+        text = text[:15000] # Limit tokens
+        
+        client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        
+        system_prompt = """You are an expert Indian legal assistant specializing in tenancy laws and rent agreements.
+Your task is to analyze the provided rent agreement text and output a JSON response containing exactly the following structure:
+{
+  "summary": "A concise, plain English summary of the agreement (max 3 sentences).",
+  "risky_clauses": [
+    {
+      "clause_text": "The exact or paraphrased text from the agreement.",
+      "risk_score": 8,
+      "reason": "A brief explanation of why this is risky under Indian tenant context."
+    }
+  ],
+  "tenant_checklist": [
+    "Actionable advice or rights the tenant should ensure before signing."
+  ]
+}
+Ensure the output is pure JSON. Do not use markdown formatting blocks around the JSON."""
+
+        response = await client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f"Analyze this agreement:\n\n{text}"}
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.2,
+        )
+        
+        result_json = json.loads(response.choices[0].message.content)
+        return result_json
+        
+    except Exception as e:
+        import traceback
+        print(traceback.format_exc())
+        raise HTTPException(status_code=500, detail=f"Failed to analyze agreement: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

@@ -12,6 +12,7 @@ import BlogDetail from "./pages/BlogDetail";
 import Tools from "./pages/Tools";
 import ToolDetail from "./pages/ToolDetail";
 import JobAnalyticsTool from "./pages/JobAnalyticsTool";
+import RentAgreementDetector from "./pages/RentAgreementDetector";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
 import Contact from "./pages/Contact";
@@ -30,6 +31,7 @@ function App() {
             <Route path="/blogs/:slug" element={<BlogDetail />} />
             <Route path="/tools" element={<Tools />} />
             <Route path="/tools/jobs-analytics" element={<JobAnalyticsTool />} />
+            <Route path="/tools/rent-agreement-detector" element={<RentAgreementDetector />} />
             <Route path="/tools/:slug" element={<ToolDetail />} />
             <Route path="/payment/success" element={<PaymentSuccess />} />
             <Route path="/payment/cancel" element={<PaymentCancel />} />
