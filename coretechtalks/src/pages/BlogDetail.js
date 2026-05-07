@@ -33,13 +33,16 @@ const BlogDetail = () => {
               component="img"
               src={blog.image}
               alt={blog.title}
-              sx={{ 
-                width: '100%', 
-                maxHeight: '400px',
-                objectFit: 'cover',
-                borderRadius: '16px',
-                mb: 4, 
-              }}
+              sx={{
+                  width: '100%',
+                  height: 'auto',
+                  maxHeight: 'none',
+                  objectFit: 'contain',
+                  borderRadius: '12px',
+                  mb: 4,
+                  display: 'block',
+                  backgroundColor: '#fff'
+                }}
             />
           )}
           <Box
