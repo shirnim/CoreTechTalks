@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Container, Button, Card, CardContent, CardActions, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL, DISABLED_TOOLS } from '../config';
 
 const Tools = () => {
   const [tools, setTools] = useState([]);
@@ -11,7 +11,9 @@ const Tools = () => {
     fetch(`${API_BASE_URL}/api/tools`)
       .then(res => res.json())
       .then(data => {
-        setTools(data);
+        // Filter out any tools that are listed in the DISABLED_TOOLS config array
+        const activeTools = (data || []).filter(tool => !DISABLED_TOOLS.includes(tool.slug));
+        setTools(activeTools);
         setLoading(false);
       })
       .catch(err => {
@@ -33,7 +35,7 @@ const Tools = () => {
         {loading ? (
           <Typography textAlign="center">Loading available tools...</Typography>
         ) : tools.length === 0 ? (
-          <Typography textAlign="center">No tools available yet. Setup backend seeder.</Typography>
+          <Typography variant="h5" textAlign="center" sx={{ mt: 4, color: 'text.secondary' }}>Tools will be coming soon.</Typography>
         ) : (
           <Grid container spacing={4}>
             {tools.map(tool => (
