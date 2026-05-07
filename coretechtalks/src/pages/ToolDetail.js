@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography, Container, Button, Paper, Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { API_BASE_URL } from '../config';
 
 const ToolDetail = () => {
   const { slug } = useParams();
@@ -10,7 +11,7 @@ const ToolDetail = () => {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/tools/${slug}`)
+    fetch(`${API_BASE_URL}/api/tools/${slug}`)
       .then(res => {
         if (!res.ok) throw new Error("Tool not found");
         return res.json();
@@ -28,7 +29,7 @@ const ToolDetail = () => {
   const handleCheckout = async () => {
     setCheckoutLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/create-checkout-session', {
+      const response = await fetch(`${API_BASE_URL}/api/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ tool_slug: slug })

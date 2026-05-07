@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Container, Button, Card, CardContent, CardActions, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 const Tools = () => {
   const [tools, setTools] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/tools')
+    fetch(`${API_BASE_URL}/api/tools`)
       .then(res => res.json())
       .then(data => {
         setTools(data);

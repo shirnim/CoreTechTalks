@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Box, Typography, Container, Button, Paper, CircularProgress } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { API_BASE_URL } from '../config';
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
@@ -17,7 +18,7 @@ const PaymentSuccess = () => {
       return;
     }
 
-    fetch(`http://localhost:8000/api/verify-session?session_id=${sessionId}`)
+    fetch(`${API_BASE_URL}/api/verify-session?session_id=${sessionId}`)
       .then(res => {
         if (!res.ok) throw new Error("Verification failed");
         return res.json();
@@ -67,7 +68,7 @@ const PaymentSuccess = () => {
                 color="primary" 
                 size="large"
                 startIcon={<DownloadIcon />}
-                href={`http://localhost:8000/api/download?token=${token}`}
+                href={`${API_BASE_URL}/api/download?token=${token}`}
                 sx={{ mb: 2, display: 'flex', width: '100%' }}
               >
                 Download File Now

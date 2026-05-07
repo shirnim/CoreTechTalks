@@ -9,6 +9,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell
 } from 'recharts';
+import { API_BASE_URL } from '../config';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#4caf50'];
 
@@ -162,7 +163,7 @@ const JobAnalyticsTool = () => {
   const fetchJobs = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/jobs/search', {
+      const response = await fetch(`${API_BASE_URL}/api/jobs/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -187,7 +188,7 @@ const JobAnalyticsTool = () => {
     setPage(0);
     setIsScraping(true);
     try {
-      const response = await fetch('http://localhost:8000/api/jobs/live-scrape', {
+      const response = await fetch(`${API_BASE_URL}/api/jobs/live-scrape`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -218,7 +219,7 @@ const JobAnalyticsTool = () => {
 
   const handleExport = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/jobs/export', {
+      const response = await fetch(`${API_BASE_URL}/api/jobs/export`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -245,7 +246,7 @@ const JobAnalyticsTool = () => {
   const fetchAnalytics = async () => {
     setAnalyticsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/jobs/analyze', {
+      const response = await fetch(`${API_BASE_URL}/api/jobs/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -291,7 +292,7 @@ const JobAnalyticsTool = () => {
     setIsAuthenticating(true);
     setAuthError('');
     try {
-      const response = await fetch('http://localhost:8000/api/jobs/verify-linkedin', {
+      const response = await fetch(`${API_BASE_URL}/api/jobs/verify-linkedin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
