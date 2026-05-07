@@ -6,3 +6,4 @@ resend
 python-dotenv
 pydantic
 pandas
+playwright
