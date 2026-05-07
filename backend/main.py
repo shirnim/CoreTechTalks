@@ -328,9 +328,17 @@ def export_jobs(query: JobSearchQuery):
 
 @app.post("/api/jobs/analyze")
 def analyze_jobs(query: JobSearchQuery):
+    from collections import Counter
+    
     filtered = _filter_jobs(query)
     if not filtered:
-        return {"total_jobs": 0, "top_company": "-", "top_title": "-", "company_chart": [], "location_chart": []}
+        return {
+            "total_jobs": 0, "top_company": "-", "top_title": "-", 
+            "top_tool": "-", "top_cert": "-",
+            "company_chart": [], "location_chart": [],
+            "tools_chart": [], "certs_chart": [],
+            "sample_responsibilities": [], "sample_qualifications": []
+        }
         
     df = pd.DataFrame(filtered)
     # Ensure columns exist and aren't completely empty before getting index[0] to avoid IndexError
@@ -343,12 +351,53 @@ def analyze_jobs(query: JobSearchQuery):
     loc_counts = df['location'].value_counts().head(5).reset_index()
     loc_chart = [{"name": row['location'], "value": row['count']} for _, row in loc_counts.iterrows()]
     
+    # NLP Aggregation
+    tool_counter = Counter()
+    cert_counter = Counter()
+    sample_resps = []
+    sample_quals = []
+    
+    for job in filtered:
+        # Tally Tools
+        if job.get("tools") and job["tools"] != "Not specified":
+            for t in job["tools"].split(","):
+                tool_counter[t.strip()] += 1
+                
+        # Tally Certs
+        if job.get("certifications") and job["certifications"] != "None required":
+            for c in job["certifications"].split(","):
+                cert_counter[c.strip()] += 1
+                
+        # Gather samples (taking 1 or 2 from each job to get a broad spread)
+        if job.get("responsibilities") and isinstance(job["responsibilities"], list):
+            sample_resps.extend(job["responsibilities"][:2])
+        if job.get("qualifications") and isinstance(job["qualifications"], list):
+            sample_quals.extend(job["qualifications"][:2])
+            
+    # Build Top 10 Tools chart
+    top_tools = tool_counter.most_common(10)
+    tools_chart = [{"name": t[0], "count": t[1]} for t in top_tools]
+    
+    # Build Top 5 Certs chart
+    top_certs = cert_counter.most_common(5)
+    certs_chart = [{"name": c[0], "value": c[1]} for c in top_certs]
+    
+    # Deduplicate and cap samples
+    sample_resps = list(dict.fromkeys(sample_resps))[:8]
+    sample_quals = list(dict.fromkeys(sample_quals))[:8]
+    
     return {
         "total_jobs": len(filtered),
         "top_company": top_company,
         "top_title": top_title,
+        "top_tool": top_tools[0][0] if top_tools else "-",
+        "top_cert": top_certs[0][0] if top_certs else "-",
         "company_chart": comp_chart,
-        "location_chart": loc_chart
+        "location_chart": loc_chart,
+        "tools_chart": tools_chart,
+        "certs_chart": certs_chart,
+        "sample_responsibilities": sample_resps,
+        "sample_qualifications": sample_quals
     }
 
 if __name__ == "__main__":

@@ -514,67 +514,154 @@ const JobAnalyticsTool = () => {
                   </Box>
                 ) : (
                   <Grid container spacing={4}>
-                    <Grid item xs={12} md={4}>
+                    
+                    {/* Top 5 Metrics Cards */}
+                    <Grid item xs={12} sm={6} md={2.4}>
                       <Card sx={{ height: '100%', boxShadow: 1 }}>
                         <CardContent>
                           <Typography color="text.secondary" gutterBottom>Total Matches</Typography>
-                          <Typography variant="h3" color="primary" fontWeight="bold">{analyticsData.total_jobs}</Typography>
+                          <Typography variant="h4" color="primary" fontWeight="bold">{analyticsData.total_jobs}</Typography>
                         </CardContent>
                       </Card>
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} sm={6} md={2.4}>
                       <Card sx={{ height: '100%', boxShadow: 1 }}>
                         <CardContent>
                           <Typography color="text.secondary" gutterBottom>Top Hiring Company</Typography>
-                          <Typography variant="h5" color="secondary" fontWeight="bold">{analyticsData.top_company}</Typography>
+                          <Typography variant="subtitle1" color="secondary" fontWeight="bold">{analyticsData.top_company}</Typography>
                         </CardContent>
                       </Card>
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} sm={6} md={2.4}>
                       <Card sx={{ height: '100%', boxShadow: 1 }}>
                         <CardContent>
                           <Typography color="text.secondary" gutterBottom>Most Common Title</Typography>
-                          <Typography variant="h6" fontWeight="bold">{analyticsData.top_title}</Typography>
+                          <Typography variant="subtitle2" fontWeight="bold">{analyticsData.top_title}</Typography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={2.4}>
+                      <Card sx={{ height: '100%', boxShadow: 1, borderLeft: '4px solid #10b981' }}>
+                        <CardContent>
+                          <Typography color="text.secondary" gutterBottom>Top Requested Tool</Typography>
+                          <Typography variant="h5" color="#10b981" fontWeight="bold">{analyticsData.top_tool}</Typography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={2.4}>
+                      <Card sx={{ height: '100%', boxShadow: 1, borderLeft: '4px solid #8b5cf6' }}>
+                        <CardContent>
+                          <Typography color="text.secondary" gutterBottom>Top Certification</Typography>
+                          <Typography variant="h6" color="#8b5cf6" fontWeight="bold">{analyticsData.top_cert}</Typography>
                         </CardContent>
                       </Card>
                     </Grid>
 
+                    {/* Row 2: Deep NLP Charts */}
                     <Grid item xs={12} md={6}>
-                      <Paper sx={{ p: 3, height: 400, boxShadow: 1 }}>
-                        <Typography variant="h6" mb={2} fontWeight="bold">Jobs by Top Companies</Typography>
-                        <ResponsiveContainer width="100%" height="85%">
-                          <BarChart data={analyticsData.company_chart}>
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                            <XAxis dataKey="name" tick={{fontSize: 12}} />
-                            <YAxis />
-                            <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }} />
-                            <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                      <Paper sx={{ p: 3, height: 420, boxShadow: 1 }}>
+                        <Typography variant="h6" mb={2} fontWeight="bold" sx={{ display: 'flex', alignItems: 'center' }}><Wrench size={20} style={{marginRight:8, color:'#10b981'}}/> Top 10 Tools & Tech Stack</Typography>
+                        <ResponsiveContainer width="100%" height="88%">
+                          <BarChart data={analyticsData.tools_chart} layout="vertical" margin={{top: 5, right: 30, left: 30, bottom: 5}}>
+                            <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                            <XAxis type="number" hide />
+                            <YAxis dataKey="name" type="category" tick={{fontSize: 12}} width={90} axisLine={false} tickLine={false} />
+                            <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }} cursor={{fill: '#f1f5f9'}} />
+                            <Bar dataKey="count" fill="#10b981" radius={[0, 4, 4, 0]} barSize={20} />
                           </BarChart>
                         </ResponsiveContainer>
                       </Paper>
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                      <Paper sx={{ p: 3, height: 400, boxShadow: 1 }}>
+                      <Paper sx={{ p: 3, height: 420, boxShadow: 1 }}>
                         <Typography variant="h6" mb={2} fontWeight="bold">Jobs Distribution by Location</Typography>
-                        <ResponsiveContainer width="100%" height="85%">
+                        <ResponsiveContainer width="100%" height="88%">
                           <PieChart>
-                            <Pie
-                              data={analyticsData.location_chart}
-                              cx="50%"
-                              cy="50%"
-                              outerRadius={120}
-                              fill="#8884d8"
-                              dataKey="value"
-                              label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
-                            >
-                              {analyticsData.location_chart.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                              ))}
+                            <Pie data={analyticsData.location_chart} cx="50%" cy="50%" outerRadius={125} fill="#8884d8" dataKey="value" label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}>
+                              {analyticsData.location_chart.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
                             </Pie>
                             <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }} />
                           </PieChart>
                         </ResponsiveContainer>
+                      </Paper>
+                    </Grid>
+
+                    {/* Row 3: Meta Charts */}
+                    <Grid item xs={12} md={6}>
+                      <Paper sx={{ p: 3, height: 350, boxShadow: 1 }}>
+                        <Typography variant="h6" mb={2} fontWeight="bold" sx={{ display: 'flex', alignItems: 'center' }}><Award size={20} style={{marginRight:8, color:'#8b5cf6'}}/> Certification Demand</Typography>
+                        <ResponsiveContainer width="100%" height="85%">
+                          <PieChart>
+                            <Pie data={analyticsData.certs_chart} cx="50%" cy="50%" innerRadius={70} outerRadius={100} paddingAngle={5} dataKey="value" label={({name}) => name}>
+                              {analyticsData.certs_chart.map((entry, index) => <Cell key={`cell-${index}`} fill={['#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe', '#f5f3ff'][index % 5]} />)}
+                            </Pie>
+                            <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }} />
+                          </PieChart>
+                        </ResponsiveContainer>
+                      </Paper>
+                    </Grid>
+
+                    <Grid item xs={12} md={6}>
+                      <Paper sx={{ p: 3, height: 350, boxShadow: 1 }}>
+                        <Typography variant="h6" mb={2} fontWeight="bold">Jobs by Top Companies</Typography>
+                        <ResponsiveContainer width="100%" height="85%">
+                          <BarChart data={analyticsData.company_chart}>
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                            <XAxis dataKey="name" tick={{fontSize: 12}} />
+                            <YAxis />
+                            <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }} cursor={{fill: '#f1f5f9'}} />
+                            <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      </Paper>
+                    </Grid>
+
+                    {/* Row 4: NLP Representative Samples */}
+                    <Grid item xs={12}>
+                      <Paper sx={{ p: 4, boxShadow: 1, borderRadius: 3 }}>
+                        <Typography variant="h5" mb={3} fontWeight="bold" color="#0f172a">Curated Market Requirements Sample</Typography>
+                        <Typography variant="body2" color="text.secondary" mb={4}>
+                          A random sampling of exact bullet points extracted across the highest-matching roles to give you an immediate feel for employer expectations.
+                        </Typography>
+                        <Grid container spacing={4}>
+                          <Grid item xs={12} md={6}>
+                            <Box sx={{ p: 3, backgroundColor: '#f0f9ff', borderRadius: 2, height: '100%' }}>
+                              <Typography variant="h6" color="#0284c7" mb={2} sx={{ display:'flex', alignItems:'center' }}>
+                                <CheckSquare size={20} style={{marginRight:8}}/> Representative Responsibilities
+                              </Typography>
+                              <List dense sx={{ pl: 1 }}>
+                                {(analyticsData.sample_responsibilities || []).map((resp, i) => (
+                                  <ListItem key={i} sx={{ alignItems: 'flex-start', mb: 1, px: 0 }}>
+                                    <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}><CheckCircle2 size={16} color="#0284c7" /></ListItemIcon>
+                                    <ListItemText primary={resp} primaryTypographyProps={{ color: '#334155', fontWeight: 500 }} />
+                                  </ListItem>
+                                ))}
+                                {(!analyticsData.sample_responsibilities || analyticsData.sample_responsibilities.length === 0) && (
+                                  <Typography variant="body2" fontStyle="italic" color="text.secondary">No responsibilities extracted from the dataset.</Typography>
+                                )}
+                              </List>
+                            </Box>
+                          </Grid>
+                          <Grid item xs={12} md={6}>
+                            <Box sx={{ p: 3, backgroundColor: '#f0fdf4', borderRadius: 2, height: '100%' }}>
+                              <Typography variant="h6" color="#16a34a" mb={2} sx={{ display:'flex', alignItems:'center' }}>
+                                <Award size={20} style={{marginRight:8}}/> Key Qualifications
+                              </Typography>
+                              <List dense sx={{ pl: 1 }}>
+                                {(analyticsData.sample_qualifications || []).map((qual, i) => (
+                                  <ListItem key={i} sx={{ alignItems: 'flex-start', mb: 1, px: 0 }}>
+                                    <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}><CheckCircle2 size={16} color="#16a34a" /></ListItemIcon>
+                                    <ListItemText primary={qual} primaryTypographyProps={{ color: '#334155', fontWeight: 500 }} />
+                                  </ListItem>
+                                ))}
+                                {(!analyticsData.sample_qualifications || analyticsData.sample_qualifications.length === 0) && (
+                                  <Typography variant="body2" fontStyle="italic" color="text.secondary">No qualifications extracted from the dataset.</Typography>
+                                )}
+                              </List>
+                            </Box>
+                          </Grid>
+                        </Grid>
                       </Paper>
                     </Grid>
                   </Grid>
