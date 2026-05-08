@@ -7,6 +7,6 @@ python-dotenv
 pydantic
 pandas
 # playwright
-google-genai
+openai
 pypdf
 python-multipart

@@ -403,15 +403,14 @@ def analyze_jobs(query: JobSearchQuery):
 @app.post("/api/rent-agreement/analyze")
 async def analyze_rent_agreement(file: UploadFile = File(...)):
     import pypdf
-    from google import genai
-    from google.genai import types
+    from openai import AsyncOpenAI
     import json
     
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are supported.")
         
-    if not os.getenv("GEMINI_API_KEY"):
-        raise HTTPException(status_code=500, detail="Gemini API key not configured on the server.")
+    if not os.getenv("XAI_API_KEY"):
+        raise HTTPException(status_code=500, detail="xAI API key not configured on the server.")
         
     try:
         pdf_reader = pypdf.PdfReader(file.file)
@@ -426,7 +425,7 @@ async def analyze_rent_agreement(file: UploadFile = File(...)):
             
         text = text[:15000] # Limit tokens
         
-        client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+        client = AsyncOpenAI(api_key=os.getenv("XAI_API_KEY"), base_url="https://api.x.ai/v1")
         
         system_prompt = """You are an expert Indian legal assistant specializing in tenancy laws and rent agreements.
 Your task is to analyze the provided rent agreement text and output a JSON response containing exactly the following structure:
@@ -445,17 +444,17 @@ Your task is to analyze the provided rent agreement text and output a JSON respo
 }
 Ensure the output is pure JSON. Do not use markdown formatting blocks around the JSON."""
 
-        response = await client.aio.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=f"Analyze this agreement:\n\n{text}",
-            config=types.GenerateContentConfig(
-                system_instruction=system_prompt,
-                response_mime_type="application/json",
-                temperature=0.2,
-            ),
+        response = await client.chat.completions.create(
+            model="grok-2-latest",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f"Analyze this agreement:\n\n{text}"}
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.2,
         )
         
-        result_json = json.loads(response.text)
+        result_json = json.loads(response.choices[0].message.content)
         return result_json
         
     except Exception as e:
