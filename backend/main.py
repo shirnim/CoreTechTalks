@@ -409,8 +409,8 @@ async def analyze_rent_agreement(file: UploadFile = File(...)):
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are supported.")
         
-    if not os.getenv("XAI_API_KEY"):
-        raise HTTPException(status_code=500, detail="xAI API key not configured on the server.")
+    if not os.getenv("GROQ_API_KEY"):
+        raise HTTPException(status_code=500, detail="Groq API key not configured on the server.")
         
     try:
         pdf_reader = pypdf.PdfReader(file.file)
@@ -425,7 +425,7 @@ async def analyze_rent_agreement(file: UploadFile = File(...)):
             
         text = text[:15000] # Limit tokens
         
-        client = AsyncOpenAI(api_key=os.getenv("XAI_API_KEY"), base_url="https://api.x.ai/v1")
+        client = AsyncOpenAI(api_key=os.getenv("GROQ_API_KEY"), base_url="https://api.groq.com/openai/v1")
         
         system_prompt = """You are an expert Indian legal assistant specializing in tenancy laws and rent agreements.
 Your task is to analyze the provided rent agreement text and output a JSON response containing exactly the following structure:
@@ -445,7 +445,7 @@ Your task is to analyze the provided rent agreement text and output a JSON respo
 Ensure the output is pure JSON. Do not use markdown formatting blocks around the JSON."""
 
         response = await client.chat.completions.create(
-            model="grok-2-latest",
+            model="llama3-70b-8192",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Analyze this agreement:\n\n{text}"}
