@@ -26,10 +26,10 @@ const Tools = () => {
     <Box sx={{ flexGrow: 1, py: 8, backgroundColor: '#F8FAFC', minHeight: 'calc(100vh - 200px)' }}>
       <Container maxWidth="lg">
         <Typography variant="h3" component="h1" sx={{ fontWeight: 700, mb: 2, textAlign: 'center' }}>
-          Interactive Tools
+          Generic Utility Tools
         </Typography>
         <Typography variant="h6" sx={{ color: 'text.secondary', mb: 6, textAlign: 'center', maxWidth: '600px', mx: 'auto' }}>
-          Explore our suite of live dashboards and automated data workflows.
+          Explore our collection of useful utilities and automated applications.
         </Typography>
 
         {loading ? (
@@ -39,7 +39,7 @@ const Tools = () => {
         ) : (
           <Grid container spacing={4}>
             {tools.map(tool => (
-              <Grid item xs={12} md={6} key={tool.id}>
+              <Grid item xs={12} md={4} key={tool.id}>
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 3 }}>
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography variant="h5" component="h2" gutterBottom fontWeight="bold">
