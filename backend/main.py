@@ -445,7 +445,7 @@ Your task is to analyze the provided rent agreement text and output a JSON respo
 Ensure the output is pure JSON. Do not use markdown formatting blocks around the JSON."""
 
         response = await client.chat.completions.create(
-            model="llama3-70b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Analyze this agreement:\n\n{text}"}
