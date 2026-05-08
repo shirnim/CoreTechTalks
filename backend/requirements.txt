@@ -6,7 +6,7 @@ resend
 python-dotenv
 pydantic
 pandas
-playwright
+# playwright
 google-genai
 pypdf
 python-multipart
