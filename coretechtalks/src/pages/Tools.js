@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Container, Button, Card, CardContent, CardActions, Grid } from '@mui/material';
+import { Box, Typography, Container, Button, Card, CardContent, CardActions } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { API_BASE_URL, DISABLED_TOOLS } from '../config';
 
@@ -11,9 +11,18 @@ const Tools = () => {
     fetch(`${API_BASE_URL}/api/tools`)
       .then(res => res.json())
       .then(data => {
-        // Filter out any tools that are listed in the DISABLED_TOOLS config array
         const activeTools = (data || []).filter(tool => !DISABLED_TOOLS.includes(tool.slug));
-        setTools(activeTools);
+
+        const dummyTools = [
+          { id: 'dummy-1', name: 'Data Visualizer Pro', description: 'Quickly create beautiful interactive charts and graphs from your raw CSV or Excel files.', slug: 'data-visualizer', isDummy: true },
+          { id: 'dummy-2', name: 'SEO Content Analyzer', description: 'Analyze your web pages for SEO best practices, keyword density, and meta tag optimization.', slug: 'seo-analyzer', isDummy: true },
+          { id: 'dummy-3', name: 'Smart JSON Formatter', description: 'Format, validate, and beautify your complex JSON data with advanced syntax highlighting.', slug: 'json-formatter', isDummy: true }
+        ];
+
+        const activeSlugs = new Set(activeTools.map(t => t.slug));
+        const filteredDummies = dummyTools.filter(d => !activeSlugs.has(d.slug));
+
+        setTools([...activeTools, ...filteredDummies]);
         setLoading(false);
       })
       .catch(err => {
@@ -35,35 +44,60 @@ const Tools = () => {
         {loading ? (
           <Typography textAlign="center">Loading available tools...</Typography>
         ) : tools.length === 0 ? (
-          <Typography variant="h5" textAlign="center" sx={{ mt: 4, color: 'text.secondary' }}>Tools will be coming soon.</Typography>
+          <Typography variant="h5" textAlign="center" sx={{ mt: 4, color: 'text.secondary' }}>
+            Tools will be coming soon.
+          </Typography>
         ) : (
-          <Grid container spacing={4}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '32px',
+            }}
+          >
             {tools.map(tool => (
-              <Grid item xs={12} md={4} key={tool.id}>
-                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 3 }}>
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography variant="h5" component="h2" gutterBottom fontWeight="bold">
-                      {tool.name}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      {tool.description}
-                    </Typography>
-                  </CardContent>
-                  <CardActions sx={{ p: 2 }}>
-                    <Button 
-                      variant="contained" 
-                      color="primary" 
-                      fullWidth 
-                      component={Link} 
-                      to={`/tools/${tool.slug}`}
-                    >
-                      Launch Application
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
+              <Card
+                key={tool.id}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '280px',
+                  borderRadius: '8px',
+                }}
+                sx={{ boxShadow: 3 }}
+              >
+                <CardContent
+                  style={{
+                    flexGrow: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    padding: '24px',
+                  }}
+                >
+                  <Typography variant="h5" component="h2" gutterBottom fontWeight="bold">
+                    {tool.name}
+                  </Typography>
+                  <Typography color="text.secondary">
+                    {tool.description}
+                  </Typography>
+                </CardContent>
+                <CardActions style={{ padding: '16px', justifyContent: 'center' }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    disabled={tool.isDummy}
+                    component={tool.isDummy ? 'button' : Link}
+                    to={tool.isDummy ? undefined : `/tools/${tool.slug}`}
+                  >
+                    Launch Application
+                  </Button>
+                </CardActions>
+              </Card>
             ))}
-          </Grid>
+          </div>
         )}
       </Container>
     </Box>
